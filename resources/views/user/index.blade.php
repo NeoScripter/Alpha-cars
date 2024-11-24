@@ -70,7 +70,54 @@
 
         </section>
 
+        <section>
+            <div class="grid gap-4 py-6 grid-cols-[repeat(auto-fit,minmax(0px,1fr))] border-y border-gray-[#E4E0E0] font-semibold text-xs sm:text-sm md:text-base text-[#999A9A]">
+                {{-- Choice --}}
+                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">Выбрать</div>
 
+                {{-- Type, Subtype, Make --}}
+                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">Тип<span class="md:hidden"> / Подтип / Марка</span></div>
+                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Подтип</div>
+                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Марка</div>
+
+                 {{-- Supplier, Rating, Managers --}}
+                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">Поставщик</div>
+                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Рейтинг</div>
+                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block"><span class="md:hidden">Рейтинг / </span>АВ</div>
+
+                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]"><span class="sm:hidden">Поставщик / Рейтинг / </span><span class="lg:hidden">Куратор / </span>Персонал</div>
+                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Куратор</div>
+
+
+
+            </div>
+        </section>
+
+
+        @isset($suppliers)
+            @foreach ($suppliers as $supplier)
+                <div>
+                    <h2>{{ $supplier->name }}</h2>
+                    <p>Car Type: {{ $supplier->carType }}</p>
+                    <p>Rating: {{ $supplier->rating }}</p>
+                    <p>Work Terms: {{ $supplier->workTerms }}</p>
+                    <p>Supervisor: {{ $supplier->supervisor }}</p>
+
+                    <p>Car Subtypes:
+                        @foreach ($supplier->carSubtype as $subtype)
+                            {{ $subtype }},
+                        @endforeach
+                    </p>
+
+                    <p>Car Makes:
+                        @foreach ($supplier->carMake as $make)
+                            {{ $make }},
+                        @endforeach
+                    </p>
+                </div>
+            @endforeach
+
+        @endisset
     </main>
 
     <script>
