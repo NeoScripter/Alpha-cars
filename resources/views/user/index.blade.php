@@ -171,6 +171,30 @@
                 <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Богатко Ольга</div>
 
             </div>
+
+            <div class="py-6 border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
+
+                <div class="bg-[#FBFBFB] p-4 rounded-lg space-y-6 mx-auto sm:w-5/6 max-w-[906px] md:ml-[122px]">
+
+                    <div class="flex flex-col gap-4 sm:flex-row">
+                        <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30">Тип</div>
+                        <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
+                            <li>Тягач</li>
+                            <li>Тягач</li>
+                            <li>Тягач</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col gap-4 sm:flex-row">
+                        <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30">Тип</div>
+                        <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
+                            <li>Тягач</li>
+                            <li>Тягач</li>
+                            <li>Тягач</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
 
