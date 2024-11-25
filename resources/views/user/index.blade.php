@@ -71,127 +71,142 @@
         </section>
 
         <section>
-            <div
-                class="grid gap-4 py-6 grid-cols-[repeat(auto-fit,minmax(0px,1fr))] border-t border-gray-[#E4E0E0] font-semibold text-xs sm:text-sm md:text-base text-[#999A9A]">
-                {{-- Choice --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">Выбрать</div>
+            <x-user.table-head/>
 
-                {{-- Type, Subtype, Make --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">Тип<span class="md:hidden"> / Подтип /
-                        Марка</span></div>
-                {{-- Subtype --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Подтип</div>
-                {{-- Make --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Марка</div>
-
-                {{-- Supplier --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">Поставщик</div>
-                {{-- Rating --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">Рейтинг</div
-                    {{-- Rating, AB --}}>
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block"><span class="md:hidden">Рейтинг /
-                    </span>АВ</div>
-
-                {{-- Supplier, Rating, Supervisor, Managers --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]"><span class="sm:hidden">Поставщик / Рейтинг /
-                    </span><span class="lg:hidden">Куратор / </span>Персонал</div>
-                {{-- Supervisor --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Куратор</div>
-
-            </div>
-
-            <div
-                class="grid gap-4 py-6 grid-cols-[repeat(auto-fit,minmax(0px,1fr))] border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
-                {{-- Choice --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">
-                    <div class="flex items-center me-4">
-                        <input checked id="red-checkbox" type="checkbox" value=""
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-red-primary focus:ring-red-primary dark:focus:ring-red-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="red-checkbox"
-                            class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">1</label>
+            <div>
+                <div
+                    class="grid gap-4 py-6 grid-cols-[repeat(auto-fit,minmax(0px,1fr))] border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
+                    {{-- Choice --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">
+                        <div class="flex items-center me-4">
+                            <input checked id="red-checkbox" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-red-primary focus:ring-red-primary dark:focus:ring-red-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="red-checkbox"
+                                class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">1</label>
+                        </div>
                     </div>
+                    {{-- Type, Subtype, Make --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] flex flex-col md:flex-row flex-wrap gap-2">
+                        <div>ГА</div>
+                        <div class="hidden md:block">ГА</div>
+                        <div class="hidden md:block">ГА</div>
+                        <span class="block space-y-2 md:hidden">
+                            <div>Тягач</div>
+                            <div>Audi</div>
+                        </span>
+                    </div>
+                    {{-- Subtype --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
+                        Тягач
+                        <x-user.expand-btn>+18</x-user.expand-btn>
+                    </div>
+                    {{-- Make --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
+                        Audi
+                        <x-user.expand-btn>+18</x-user.expand-btn>
+                    </div>
+                    {{-- Supplier --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">Рольф</div>
+                    {{-- Rating --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">А</div {{-- Rating, AB --}}>
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block"><span class="md:hidden">А /
+                        </span>АВ</div>
+                    {{-- Supplier, Rating, Supervisor, Managers --}}
+                    <div class="sm:mx-1 py-1 border-r border-gray-[#E4E0E0]">
+                        <span class="sm:hidden">Поставщик / Рейтинг / </span>
+                        <span class="lg:hidden">Куратор / </span>
+                        <button class="flex gap-2 p-1 mt-2 rounded-full md:p-2 bg-extra-light-gray">
+                            <div
+                                class="grid grid-cols-[repeat(3,12px)] sm:grid-cols-[repeat(3,18px)] lg:grid-cols-[repeat(5,20px)]">
+                                <x-user.avatar :img_path="asset('images/png/avatar.jpeg')" />
+                                <x-user.avatar :img_path="asset('images/png/avatar.jpeg')" />
+                                <div class="w-6 h-6 p-1 bg-gray-200 rounded-full sm:w-8 sm:h-8">
+                                    +5
+                                </div>
+                            </div>
+                            <div class="grid content-center p-2 pr-2">
+                                <svg class="w-2 h-1 rotate-180 sm:w-3 sm:h-2 shrink-0" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M9 5 5 1 1 5" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    {{-- Supervisor --}}
+                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Богатко Ольга</div>
                 </div>
-
-                {{-- Type, Subtype, Make --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] flex flex-col md:flex-row flex-wrap gap-2">
-                    <div>ГА</div>
-                    <div class="hidden md:block">ГА</div>
-                    <div class="hidden md:block">ГА</div>
-                    <span class="block space-y-2 md:hidden">
-                        <div>Тягач</div>
-                        <div>Audi</div>
-                    </span>
-                </div>
-                {{-- Subtype --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
-                    Тягач
-                    <x-user.expand-btn>+18</x-user.expand-btn>
-                </div>
-                {{-- Make --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
-                    Audi
-                    <x-user.expand-btn>+18</x-user.expand-btn>
-                </div>
-
-                {{-- Supplier --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">Рольф</div>
-                {{-- Rating --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">А</div {{-- Rating, AB --}}>
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block"><span class="md:hidden">А /
-                    </span>АВ</div>
-
-                {{-- Supplier, Rating, Supervisor, Managers --}}
-                <div class="sm:mx-1 py-1 border-r border-gray-[#E4E0E0]">
-                    <span class="sm:hidden">Поставщик / Рейтинг / </span>
-                    <span class="lg:hidden">Куратор / </span>
-
-                    <button class="flex gap-2 p-1 mt-2 rounded-full md:p-2 bg-extra-light-gray">
-                        <div
-                            class="grid grid-cols-[repeat(3,12px)] sm:grid-cols-[repeat(3,18px)] lg:grid-cols-[repeat(5,20px)]">
-
-                            <x-user.avatar :img_path="asset('images/png/avatar.jpeg')" />
-
-                            <x-user.avatar :img_path="asset('images/png/avatar.jpeg')" />
-
-                            <div class="w-6 h-6 p-1 bg-gray-200 rounded-full sm:w-8 sm:h-8">
-                                +5
+                <div class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2">
+                    <div class="bg-[#FBFBFB] p-4 rounded-lg mx-auto sm:w-5/6 md:px-6 md:py-3 max-w-[1300px]">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="text-gray-400">менеджер</div>
+                            <div class="flex items-center gap-2">
+                                4.6
+                                <img src="{{ asset('images/svgs/star.svg') }}" alt="Желтая звезда" class="w-6 h-6">
                             </div>
                         </div>
-                        <div class="grid content-center p-2 pr-2">
-                            <svg class="w-2 h-1 rotate-180 sm:w-3 sm:h-2 shrink-0" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M9 5 5 1 1 5" />
-                            </svg>
+                        <div class="flex flex-col items-start justify-between gap-4 sm:flex-row">
+                            <div class="flex items-center gap-2">
+                                <img src="{{ asset('images/png/avatar.jpeg') }}" alt="Фото менеджера"
+                                    class="w-8 h-8 rounded-full md:w-10 md:h-10">
+                                Кузьмина Анна
+                            </div>
+                            <div>
+                                <a href="tel:+7 (926) 123-45-23" class="block mb-4 text-blue-600">+7 (926) 123-45-23</a>
+                                <a href="mailto:admin@rolf.ru" class="block underline">admin@rolf.ru</a>
+                            </div>
+                            <div class="self-end mt-6 sm:mt-0">
+                                <button
+                                    class="block px-6 py-3 mb-2 font-bold text-white transition-colors border bg-black-primary rounded-xl hover:bg-red-primary"
+                                    type="submit">Оставить отзыв
+                                </button>
+                                <a href="" class="block ml-auto text-center text-gray-400 underline">Читать все отзывы</a>
+                            </div>
                         </div>
-                    </button>
-
-                </div>
-                {{-- Supervisor --}}
-                <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Богатко Ольга</div>
-
-            </div>
-
-            <div class="py-6 border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
-
-                <div class="bg-[#FBFBFB] p-4 rounded-lg space-y-6 mx-auto sm:w-5/6 max-w-[906px] md:ml-[122px]">
-
-                    <div class="flex flex-col gap-4 sm:flex-row">
-                        <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30">Тип</div>
-                        <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
-                            <li>Тягач</li>
-                            <li>Тягач</li>
-                            <li>Тягач</li>
-                        </ul>
                     </div>
-
-                    <div class="flex flex-col gap-4 sm:flex-row">
-                        <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30">Тип</div>
-                        <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
-                            <li>Тягач</li>
-                            <li>Тягач</li>
-                            <li>Тягач</li>
-                        </ul>
+                </div>
+                <div class="py-6 border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
+                    <div class="bg-[#FBFBFB] p-4 rounded-lg space-y-6 mx-auto sm:w-5/6 max-w-[906px] md:ml-[122px]">
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30 shrink-0">Тип
+                            </div>
+                            <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                            </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30 shrink-0">Подтип
+                            </div>
+                            <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                            </ul>
+                        </div>
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="font-semibold text-xs sm:text-sm md:text-base text-[#999A9A] w-30 shrink-0">Марка
+                            </div>
+                            <ul class="flex flex-wrap gap-4 text-xs text-black sm:text-sm md:text-base">
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                                <li>Тягач</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -94,3 +94,7 @@
 .checkbox-input:checked + label {
     color: red;
 }
+
+[x-cloak] {
+    display: none;
+}
