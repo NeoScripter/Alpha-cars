@@ -1,5 +1,5 @@
 <button
-    @click="showCarInfo = !showCarInfo"
+    @click="showCarInfo = !showCarInfo, showManagerInfo = false"
     class="flex gap-2 p-0.5 rounded-full bg-extra-light-gray mt-2">
     <div class="p-1 text-sm bg-gray-200 rounded-full">
         {{ $slot }}

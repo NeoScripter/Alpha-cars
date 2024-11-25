@@ -37,9 +37,9 @@
                 </div>
             </form>
 
-
             <div class="p-4 mt-20 md:mt-10 lg:mt-20 sm:flex sm:gap-4 sm:flex-wrap sm:items-center md:p-6 lg:p-8">
-                <span class="block mb-4 font-bold text-black md:w-auto sm:mb-0 sm:w-full">Всего найдено: 20</span>
+                <span class="block mb-4 font-bold text-black md:w-auto sm:mb-0 sm:w-full">Всего найдено:
+                    {{ isset($suppliers) ? count($suppliers) : 0 }}</span>
 
                 <div class="mb-6 sm:mb-0">
                     <template x-for="(field, fieldName) in fields" :key="fieldName">
@@ -73,102 +73,37 @@
         <section>
             <x-user.table-head />
 
-            <div x-data="{ showCarInfo: false, showManagerInfo: false }">
-                <div
-                    class="grid gap-4 py-6 grid-cols-[repeat(auto-fit,minmax(0px,1fr))] border-t border-gray-[#E4E0E0] text-xs sm:text-sm md:text-base text-black">
-                    {{-- Choice --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0]">
-                        <div class="flex items-center me-4">
-                            <input checked id="red-checkbox" type="checkbox" value=""
-                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-red-primary focus:ring-red-primary dark:focus:ring-red-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="red-checkbox"
-                                class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">1</label>
+            @isset($suppliers)
+                @foreach ($suppliers as $index => $supplier)
+                    <div x-data="{ showCarInfo: false, showManagerInfo: false }">
+
+
+                        <x-user.supplier-info :order="$index + 1" :type="$supplier->carType" :subtype="$supplier->carSubtype" :make="$supplier->carMake" :name="$supplier->name"
+                            :rating="$supplier->rating" :terms="$supplier->workTerms" :supervisor="$supplier->supervisor" :avatars="$supplier->managers->pluck('image')->toArray()" />
+
+
+
+                        <div x-show="showManagerInfo" x-transition x-cloak
+                            class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2">
+                            @isset($supplier->managers)
+                                @foreach ($supplier->managers as $manager)
+                                    <x-user.manager-info
+                                    :rating="$manager->stars"
+                                    :name="$manager->name"
+                                    :phone="$manager->phone"
+                                    :email="$manager->email"
+                                    :image="$manager->image"
+                                    />
+                                @endforeach
+                            @endisset
                         </div>
+
+                        <x-user.car-info :types="$supplier->carType" :subtypes="$supplier->carSubtype" :makes="$supplier->carMake" />
                     </div>
-                    {{-- Type, Subtype, Make --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] flex flex-col md:flex-row flex-wrap gap-2">
-                        <div>ГА</div>
-                        <div class="hidden md:block">ГА</div>
-                        <div class="hidden md:block">ГА</div>
-                        <span class="block space-y-2 md:hidden">
-                            <div>Тягач</div>
-                            <div>Audi</div>
-                        </span>
-                    </div>
-                    {{-- Subtype --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
-                        Тягач
-                        <x-user.expand-btn>+18</x-user.expand-btn>
-                    </div>
-                    {{-- Make --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">
-                        Audi
-                        <x-user.expand-btn>+18</x-user.expand-btn>
-                    </div>
-                    {{-- Supplier --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">Рольф</div>
-                    {{-- Rating --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">А</div {{-- Rating, AB --}}>
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block"><span class="md:hidden">А /
-                        </span>АВ</div>
-                    {{-- Supplier, Rating, Supervisor, Managers --}}
-                    <div class="sm:mx-1 py-1 md:pr-3 border-r border-gray-[#E4E0E0]">
-                        <span class="sm:hidden">Поставщик / Рейтинг / </span>
-                        <span class="lg:hidden">Куратор / </span>
-
-
-                        <x-user.avatar-btn :images="[
-                            asset('images/png/avatar.jpeg'),
-                            asset('images/png/avatar.jpeg'),
-                            asset('images/png/avatar.jpeg'),
-                            asset('images/png/avatar.jpeg'),
-                        ]" />
-
-                    </div>
-                    {{-- Supervisor --}}
-                    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden lg:block">Богатко Ольга</div>
-                </div>
-
-
-                <div x-show="showManagerInfo" x-transition x-cloak
-                    class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2">
-                    <x-user.manager-info />
-
-                    <x-user.manager-info />
-
-                    <x-user.manager-info />
-                </div>
-
-
-                <x-user.car-info :types="['Тягач', 'Самосвал']" :subtypes="['Подтип 1', 'Подтип 2', 'Подтип 3']" :makes="['Марка 1', 'Марка 2', 'Марка 3']" />
-            </div>
+                @endforeach
+            @endisset
         </section>
 
-
-        @isset($suppliers)
-            @foreach ($suppliers as $supplier)
-                <div>
-                    <h2>{{ $supplier->name }}</h2>
-                    <p>Car Type: {{ $supplier->carType }}</p>
-                    <p>Rating: {{ $supplier->rating }}</p>
-                    <p>Work Terms: {{ $supplier->workTerms }}</p>
-                    <p>Supervisor: {{ $supplier->supervisor }}</p>
-
-                    <p>Car Subtypes:
-                        @foreach ($supplier->carSubtype as $subtype)
-                            {{ $subtype }},
-                        @endforeach
-                    </p>
-
-                    <p>Car Makes:
-                        @foreach ($supplier->carMake as $make)
-                            {{ $make }},
-                        @endforeach
-                    </p>
-                </div>
-            @endforeach
-
-        @endisset
     </main>
 
     <footer class="h-8 mt-5 md:mt-10 bg-red-primary"></footer>

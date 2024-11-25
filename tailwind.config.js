@@ -25,7 +25,8 @@ export default {
                 "black-primary": "#0F1011",
                 "extra-light-gray": "#F5F5F5",
                 "light-gray": "#999A9A",
-                "blue-primary": "#2163CB"
+                "blue-primary": "#2163CB",
+                "border-gray-light": "#E4E0E0",
             },
             maxWidth: {
                 "screen-3xl": "1920px",

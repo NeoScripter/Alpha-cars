@@ -1,7 +1,7 @@
-@props(['images' => [], 'total_managers' => 5])
+@props(['images' => []])
 
 <button
-    @click="showManagerInfo = !showManagerInfo"
+    @click="showManagerInfo = !showManagerInfo, showCarInfo = false"
     class="flex justify-between gap-2 p-1 mt-2 rounded-full md:w-full lg:w-auto md:p-2 bg-extra-light-gray">
     <!-- Avatar Grid -->
     <div
@@ -11,9 +11,9 @@
                 <x-user.avatar :img_path="$image" />
             @endif
         @endforeach
-        @if ($total_managers > 3)
+        @if (count($images) > 3)
             <div class="flex items-center justify-center w-6 h-6 p-1 bg-gray-200 rounded-full sm:w-8 sm:h-8">
-                +{{ $total_managers - 3 }}
+                +{{ count($images) - 3 }}
             </div>
         @endif
     </div>

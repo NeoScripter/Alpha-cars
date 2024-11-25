@@ -19,7 +19,7 @@ class SupplierController extends Controller
             'rating',
             'workTerms',
             'supervisor',
-        ])->get();
+        ])->with('managers')->get();
 
         return view('user.index', compact('suppliers'));
     }

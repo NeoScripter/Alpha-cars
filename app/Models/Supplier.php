@@ -40,9 +40,15 @@ class Supplier extends Model
         'phones' => 'array',             // Convert JSON to array
         'carSubtype' => 'array',         // Convert JSON to array
         'carMake' => 'array',            // Convert JSON to array
+        'carType' => 'array',
         'dkp' => 'boolean',              // Boolean flag
         'image_spec' => 'boolean',       // Boolean flag
         'warantees' => 'boolean',        // Boolean flag
         'payWithoutPTC' => 'boolean',    // Boolean flag
     ];
+
+    public function managers()
+    {
+        return $this->hasMany(Manager::class);
+    }
 }

@@ -1,4 +1,4 @@
-@props(['rating' => 4.5, 'name' => 'Кузьмина Анна', 'phone' => '+7 (926) 123-45-23', 'email' => 'admin@rolf.ru'])
+@props(['rating' => 4.5, 'name' => 'Кузьмина Анна', 'phone' => '+7 (926) 123-45-23', 'email' => 'admin@rolf.ru', 'image' => asset('images/png/avatar.jpeg')])
 
 <div class="bg-[#FBFBFB] p-4 rounded-lg mx-auto sm:w-5/6 md:px-6 md:py-3 max-w-[1300px]">
     <div class="flex items-center justify-between mb-2">
@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-col items-start justify-between gap-4 sm:flex-row">
         <div class="flex items-center gap-2">
-            <img src="{{ asset('images/png/avatar.jpeg') }}" alt="Фото менеджера"
+            <img src="{{ $image }}" alt="Фото менеджера"
                 class="w-8 h-8 rounded-full md:w-10 md:h-10">
             {{ $name }}
         </div>

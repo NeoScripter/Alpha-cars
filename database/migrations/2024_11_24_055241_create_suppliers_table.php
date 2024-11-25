@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('itn')->nullable(); // Tax identification number
             $table->string('rrc')->nullable(); // RRC (e.g., regulatory code)
             $table->string('rating')->nullable(); // Supplier rating
-            $table->string('carType')->nullable(); // Type of cars
+            $table->json('carType')->nullable(); // Type of cars
             $table->json('carSubtype')->nullable(); // Car subtypes as JSON
             $table->json('carMake')->nullable(); // Car makes as JSON
             $table->string('workTerms')->nullable(); // Terms of work
