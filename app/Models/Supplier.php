@@ -51,4 +51,53 @@ class Supplier extends Model
     {
         return $this->hasMany(Manager::class);
     }
+
+    public function scopeSearch($query, array $filters = [])
+    {
+        collect($filters)->filter()->each(function ($values, $field) use ($query) {
+            if (is_array($values)) {
+                // Handle JSON fields
+                if (in_array($field, ['carType', 'carSubtype', 'carMake'])) {
+                    $query->where(function ($subQuery) use ($field, $values) {
+                        foreach ($values as $value) {
+                            $subQuery->orWhereJsonContains($field, $value);
+                        }
+                    });
+                } else {
+                    // Handle plain string fields like rating and workTerms
+                    $query->where(function ($subQuery) use ($field, $values) {
+                        foreach ($values as $value) {
+                            $subQuery->orWhere($field, $value);
+                        }
+                    });
+                }
+            } else {
+                // Handle single string inputs
+                $query->where($field, 'like', "%{$values}%");
+            }
+        });
+
+    }
+
+    /**
+     * Scope for filtering suppliers by distinct values for dropdowns and checkboxes.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return array
+     */
+    public static function preloadFilters()
+    {
+        // Fetch unique values for JSON fields and regular string fields
+        $suppliers = self::select(['carType', 'carSubtype', 'carMake', 'name', 'rating', 'workTerms'])->get();
+
+        return [
+            'carTypes' => $suppliers->pluck('carType')->flatten()->unique()->sort()->values(),
+            'carSubtypes' => $suppliers->pluck('carSubtype')->flatten()->unique()->sort()->values(),
+            'carMakes' => $suppliers->pluck('carMake')->flatten()->unique()->sort()->values(),
+            'names' => $suppliers->pluck('name')->unique()->sort()->values(),
+            'ratings' => $suppliers->pluck('rating')->unique()->sort()->values(),
+            'workTerms' => $suppliers->pluck('workTerms')->unique()->sort()->values(),
+        ];
+    }
+
 }

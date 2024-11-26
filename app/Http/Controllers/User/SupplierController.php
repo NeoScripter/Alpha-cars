@@ -10,7 +10,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = Supplier::select([
+        /* $suppliers = Supplier::select([
             'id',
             'name',
             'carType',
@@ -19,8 +19,17 @@ class SupplierController extends Controller
             'rating',
             'workTerms',
             'supervisor',
-        ])->with('managers')->get();
+        ])->with('managers')->paginate(10); */
 
-        return view('user.index', compact('suppliers'));
+        $options = Supplier::preloadFilters();
+
+        $filters = request()->only(['carType', 'carSubtype', 'carMake', 'name', 'rating', 'workTerms']);
+
+        $suppliers = Supplier::query()
+            ->search($filters)
+            ->with('managers')
+            ->paginate(10);
+
+        return view('user.index', compact('suppliers', 'options'));
     }
 }

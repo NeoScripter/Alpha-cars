@@ -19,6 +19,7 @@ class ManagerFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->name,
             'image' => collect(glob(public_path('images/avatars/*.*')))
                     ->map(fn($path) => Str::replaceFirst(public_path(), '', $path))
                     ->random(),

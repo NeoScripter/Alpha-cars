@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('managers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('image');
             $table->string('phone');
             $table->string('email')->unique();

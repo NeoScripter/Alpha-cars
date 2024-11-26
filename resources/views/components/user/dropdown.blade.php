@@ -9,9 +9,9 @@
         @change="addToArray('{{ $name }}', $event.target.value)"
     >
         <option value="" disabled selected class="{{ $selected ? '' : 'hidden' }}"></option>
-        @foreach ($options as $key => $value)
-            @if ($key != $selected)
-                <option value="{{ $key }}">{{ $value }}</option>
+        @foreach ($options as $value)
+            @if ($value != $selected)
+                <option value="{{ $value }}">{{ $value }}</option>
             @endif
         @endforeach
     </select>

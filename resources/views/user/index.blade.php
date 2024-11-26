@@ -7,27 +7,27 @@
 
         <section x-data="selectInputHandler()">
 
-            <form action="" class="md:p-6 p-4 lg:p-8 bg-[#FBFBFB] rounded-xl">
+            <form method="GET" action="{{ route('user.index') }}" class="md:p-6 p-4 lg:p-8 bg-[#FBFBFB] rounded-xl">
                 <div class="grid gap-4 my-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <x-dropdown name="type" :options="['US' => 'United States', 'CA' => 'Canada', 'FR' => 'France', 'DE' => 'Germany']">
+                    <x-dropdown name="carType" :options="$options['carTypes']">
                         Тип авто
                     </x-dropdown>
-                    <x-dropdown name="subtype" :options="['US' => 'United States', 'CA' => 'Canada', 'FR' => 'France', 'DE' => 'Germany']">
+                    <x-dropdown name="carSubtype" :options="$options['carSubtypes']">
                         Подтип авто
                     </x-dropdown>
-                    <x-dropdown name="make" :options="['US' => 'United States', 'CA' => 'Canada', 'FR' => 'France', 'DE' => 'Germany']">
+                    <x-dropdown name="carMake" :options="$options['carMakes']">
                         Марка
                     </x-dropdown>
-                    <x-dropdown name="supplier" :options="['US' => 'United States', 'CA' => 'Canada', 'FR' => 'France', 'DE' => 'Germany']">
+                    <x-dropdown name="name" :options="$options['names']">
                         Поставщик
                     </x-dropdown>
                 </div>
 
                 <div class="flex-wrap items-center justify-between my-4 sm:flex gap-x-4 md:gap-10">
-                    <x-checkbox name="rating" :options="['A' => 'A', 'B' => 'B', 'C' => 'C']">
+                    <x-checkbox name="rating" :options="$options['ratings']">
                         Рейтинг дилера
                     </x-checkbox>
-                    <x-checkbox name="workTerms" :options="['vkrug' => 'АВ - в круг', 'no' => 'АВ - нет']">
+                    <x-checkbox name="workTerms" :options="$options['workTerms']">
                         Условия работы
                     </x-checkbox>
 
@@ -46,7 +46,7 @@
                         <template x-for="(value, index) in field" :key="index">
                             <span
                                 class="inline-flex items-center px-2 py-1 mx-2 my-1 rounded-lg bg-extra-light-gray text-red-primary">
-                                <span x-text="`${fieldName}: ${value}`"></span>
+                                <span x-text="`${value}`"></span>
                                 <button class="ml-2 text-red-500 remove-button"
                                     @click="removeFromArray(fieldName, index)">
                                     &times;
@@ -70,7 +70,7 @@
 
         </section>
 
-        <section>
+        <section id="table">
             <x-user.table-head />
 
             @isset($suppliers)
@@ -104,6 +104,10 @@
             @endisset
         </section>
 
+        @isset($suppliers)
+        {{ $suppliers->links() }}
+        @endisset
+
     </main>
 
     <footer class="h-8 mt-5 md:mt-10 bg-red-primary"></footer>
@@ -112,10 +116,10 @@
         function selectInputHandler() {
             return {
                 fields: {
-                    type: [],
-                    subtype: [],
-                    make: [],
-                    supplier: [],
+                    carType: [],
+                    carSubtype: [],
+                    carMake: [],
+                    name: [],
                 },
 
                 addToArray(field, value) {

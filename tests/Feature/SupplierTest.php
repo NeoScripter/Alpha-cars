@@ -21,7 +21,7 @@ it('loads the suppliers on the index page', function () {
         $response->assertSee($supplier->supervisor);
 
         // Assert array fields
-     /*    foreach ($supplier->carSubtype as $subtype) {
+        foreach ($supplier->carSubtype as $subtype) {
             $response->assertSee($subtype);
         }
 
@@ -31,28 +31,120 @@ it('loads the suppliers on the index page', function () {
 
         foreach ($supplier->carType as $type) {
             $response->assertSee($type);
-        } */
+        }
     }
 });
 
 
 it('loads suppliers and their managers on the main page', function () {
-    // Arrange: Create suppliers with managers
     $suppliers = Supplier::factory()
-        ->has(Manager::factory()->count(3)) // Each supplier has 3 managers
+        ->has(Manager::factory()->count(3))
         ->count(2)
         ->create();
 
-    // Act: Load the main page
-    $response = $this->get(route('user.index')); // Replace 'main.page' with your actual route name
+    $response = $this->get(route('user.index'));
 
-    // Assert: Suppliers and their managers are eager-loaded and visible
     $response->assertOk();
 
     foreach ($suppliers as $supplier) {
-        $response->assertSee($supplier->name); // Assuming suppliers have a 'name' attribute
+        $response->assertSee($supplier->name);
         foreach ($supplier->managers as $manager) {
-            $response->assertSee($manager->name ?? $manager->email); // Check manager visibility
+            $response->assertSee($manager->name ?? $manager->email);
         }
     }
+});it('filters suppliers based on exact matches', function () {
+    $matchingSupplier = Supplier::factory()->create([
+        'carType' => ['SUV'],
+        'carSubtype' => ['Crossover'],
+        'carMake' => ['Toyota'],
+        'name' => 'Supplier A',
+        'rating' => 'A',
+        'workTerms' => 'Flexible',
+    ]);
+
+    $nonMatchingSupplier = Supplier::factory()->create([
+        'carType' => ['Truck'],
+        'carSubtype' => ['Heavy Duty'],
+        'carMake' => ['Ford'],
+        'name' => 'Supplier B',
+        'rating' => 'B',
+        'workTerms' => 'Strict',
+    ]);
+
+    $response = $this->get(route('user.index', [
+        'carType' => ['SUV'],
+        'carSubtype' => ['Crossover'],
+        'carMake' => ['Toyota'],
+        'name' => 'Supplier A',
+        'rating' => ['A'],
+        'workTerms' => ['Flexible'],
+    ]));
+
+    $response->assertOk();
+    $response->assertSeeInOrder([
+        '<section id="table">',
+        'Supplier A',
+        '</section>',
+    ], false);
+
+});
+
+it('excludes suppliers when nullable fields do not match', function () {
+    Supplier::factory()->create([
+        'carType' => ['SUV'],
+        'workTerms' => 'Flexible',
+    ]);
+
+    Supplier::factory()->create([
+        'carType' => ['SUV'],
+        'workTerms' => null,
+    ]);
+
+    $response = $this->get(route('user.index', [
+        'carType' => ['SUV'],
+        'workTerms' => ['Flexible'],
+    ]));
+
+    $response->assertOk();
+    $response->assertSeeInOrder([
+        '<section id="table">',
+        'SUV',
+        'Flexible',
+        '</section>',
+    ], false);
+
+});
+
+it('returns all suppliers for an empty search', function () {
+    $supplier1 = Supplier::factory()->create(['name' => 'Supplier A']);
+    $supplier2 = Supplier::factory()->create(['name' => 'Supplier B']);
+
+    $response = $this->get(route('user.index', []));
+
+    $response->assertOk();
+
+    $response->assertSee('Supplier A');
+    $response->assertSee('Supplier B');
+});
+
+it('excludes suppliers when filters do not match', function () {
+    Supplier::factory()->create([
+        'carType' => ['SUV'],
+        'carSubtype' => ['Crossover'],
+    ]);
+
+    Supplier::factory()->create([
+        'carType' => ['Truck'],
+        'carSubtype' => ['Heavy Duty'],
+    ]);
+
+    $response = $this->get(route('user.index', [
+        'carType' => ['Electric'],
+    ]));
+
+    $response->assertOk();
+    $response->assertSeeInOrder([
+        '<section id="table">',
+        '</section>',
+    ], false);
 });
