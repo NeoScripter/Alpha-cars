@@ -40,8 +40,24 @@
             @endisset
 
             <div class="p-4 mt-20 md:mt-10 lg:mt-20 sm:flex sm:gap-4 sm:flex-wrap sm:items-center md:p-6 lg:p-8">
-                <span class="block mb-4 font-bold text-black md:w-auto sm:mb-0 sm:w-full">Всего найдено:
-                    {{ isset($suppliers) ? count($suppliers) : 0 }}</span>
+                <span class="inline-flex items-center gap-4 mb-4 text-sm text-black sm:text-base md:w-auto sm:mb-0 sm:w-full">
+                    Показать на странице
+                        <div class="flex items-center gap-1">
+                            <a href="{{ route('user.index', array_merge(request()->except('page'), ['perPage' => 20])) }}"
+                               class="py-1 px-3 block border border-gray-200 {{ $perPage == 20 ? 'bg-red-primary text-white' : '' }} rounded">
+                                20
+                            </a>
+                            <a href="{{ route('user.index', array_merge(request()->except('page'), ['perPage' => 40])) }}"
+                               class="py-1 px-3 block border border-gray-200 {{ $perPage == 40 ? 'bg-red-primary text-white' : '' }} rounded">
+                                40
+                            </a>
+                            <a href="{{ route('user.index', array_merge(request()->except('page'), ['perPage' => 60])) }}"
+                               class="py-1 px-3 block border border-gray-200 {{ $perPage == 60 ? 'bg-red-primary text-white' : '' }} rounded">
+                                60
+                            </a>
+                        </div>
+
+                </span>
 
                 <div class="mb-6 sm:mb-0">
                     <template x-for="(field, fieldName) in fields" :key="fieldName">
@@ -113,7 +129,7 @@
         </section>
 
         @isset($suppliers)
-            {{ $suppliers->links() }}
+            {{ $suppliers->appends(request()->except('page'))->links() }}
         @endisset
 
     </main>

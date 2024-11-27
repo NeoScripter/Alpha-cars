@@ -15,11 +15,16 @@ class SupplierController extends Controller
 
         $filters = request()->only(['carType', 'carSubtype', 'carMake', 'name', 'rating', 'workTerms']);
 
+        $perPage = request('perPage', session('perPage', 20));
+
+        // Store the perPage value in the session
+        session(['perPage' => $perPage]);
+
         $suppliers = Supplier::query()
             ->search($filters)
             ->with('managers')
-            ->paginate(10);
+            ->paginate($perPage);
 
-        return view('user.index', compact('suppliers', 'options'));
+        return view('user.index', compact('suppliers', 'options', 'perPage'));
     }
 }
