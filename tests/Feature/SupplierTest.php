@@ -148,3 +148,33 @@ it('excludes suppliers when filters do not match', function () {
         '</section>',
     ], false);
 });
+
+it('filters suppliers by multiple selected values', function () {
+    // Arrange: Create sample suppliers
+    $supplier1 = Supplier::factory()->create([
+        'carMake' => ['Toyota', 'Honda'],
+        'rating' => 'A',
+    ]);
+
+    $supplier2 = Supplier::factory()->create([
+        'carMake' => ['Ford'],
+        'rating' => 'B',
+    ]);
+
+    $supplier3 = Supplier::factory()->create([
+        'carMake' => ['Tesla'],
+        'rating' => 'C',
+    ]);
+
+    // Act: Perform a search for multiple car makes and ratings
+    $response = $this->get(route('user.index', [
+        'carMake' => ['Toyota', 'Ford'],
+        'rating' => ['A', 'B'],
+    ]));
+
+    // Assert: Only matching suppliers are returned
+    $response->assertOk();
+    $response->assertSee('Toyota');
+    $response->assertSee('Ford');
+    $response->assertDontSee('Tesla');
+});

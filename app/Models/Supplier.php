@@ -51,33 +51,29 @@ class Supplier extends Model
     {
         return $this->hasMany(Manager::class);
     }
-
     public function scopeSearch($query, array $filters = [])
     {
-        collect($filters)->filter()->each(function ($values, $field) use ($query) {
+        foreach ($filters as $field => $values) {
             if (is_array($values)) {
-                // Handle JSON fields
-                if (in_array($field, ['carType', 'carSubtype', 'carMake'])) {
-                    $query->where(function ($subQuery) use ($field, $values) {
-                        foreach ($values as $value) {
+                // Group all conditions for the field
+                $query->where(function ($subQuery) use ($field, $values) {
+                    foreach ($values as $value) {
+                        if (in_array($field, ['carType', 'carSubtype', 'carMake'])) {
+                            // JSON fields
                             $subQuery->orWhereJsonContains($field, $value);
-                        }
-                    });
-                } else {
-                    // Handle plain string fields like rating and workTerms
-                    $query->where(function ($subQuery) use ($field, $values) {
-                        foreach ($values as $value) {
+                        } else {
+                            // String fields
                             $subQuery->orWhere($field, $value);
                         }
-                    });
-                }
+                    }
+                });
             } else {
-                // Handle single string inputs
+                // Single string input
                 $query->where($field, 'like', "%{$values}%");
             }
-        });
-
+        }
     }
+
 
     /**
      * Scope for filtering suppliers by distinct values for dropdowns and checkboxes.

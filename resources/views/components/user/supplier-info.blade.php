@@ -55,7 +55,7 @@
     <div class="sm:mx-1 py-1 md:pr-3 border-r space-y-2 border-gray-[#E4E0E0]">
         <span class="block sm:hidden">{{ $name }}</span>
         <span class="block sm:hidden">{{ $rating }}</span>
-        <span class="block lg:hidden">{{ $terms }}</span>
+        <span class="block sm:hidden">{{ $terms }}</span>
         <span class="block font-medium lg:hidden">{{ $supervisor }}</span>
 
         <x-user.avatar-btn :images="$avatars" />

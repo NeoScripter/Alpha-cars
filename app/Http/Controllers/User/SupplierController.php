@@ -10,16 +10,6 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        /* $suppliers = Supplier::select([
-            'id',
-            'name',
-            'carType',
-            'carSubtype',
-            'carMake',
-            'rating',
-            'workTerms',
-            'supervisor',
-        ])->with('managers')->paginate(10); */
 
         $options = Supplier::preloadFilters();
 

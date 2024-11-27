@@ -7,35 +7,37 @@
 
         <section x-data="selectInputHandler()">
 
-            <form method="GET" action="{{ route('user.index') }}" class="md:p-6 p-4 lg:p-8 bg-[#FBFBFB] rounded-xl">
-                <div class="grid gap-4 my-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <x-dropdown name="carType" :options="$options['carTypes']">
-                        Тип авто
-                    </x-dropdown>
-                    <x-dropdown name="carSubtype" :options="$options['carSubtypes']">
-                        Подтип авто
-                    </x-dropdown>
-                    <x-dropdown name="carMake" :options="$options['carMakes']">
-                        Марка
-                    </x-dropdown>
-                    <x-dropdown name="name" :options="$options['names']">
-                        Поставщик
-                    </x-dropdown>
-                </div>
+            @isset($options)
+                <form method="GET" action="{{ route('user.index') }}" class="md:p-6 p-4 lg:p-8 bg-[#FBFBFB] rounded-xl">
+                    <div class="grid gap-4 my-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <x-dropdown name="carType" :options="$options['carTypes']">
+                            Тип авто
+                        </x-dropdown>
+                        <x-dropdown name="carSubtype" :options="$options['carSubtypes']">
+                            Подтип авто
+                        </x-dropdown>
+                        <x-dropdown name="carMake" :options="$options['carMakes']">
+                            Марка
+                        </x-dropdown>
+                        <x-dropdown name="name" :options="$options['names']">
+                            Поставщик
+                        </x-dropdown>
+                    </div>
 
-                <div class="flex-wrap items-center justify-between my-4 sm:flex gap-x-4 md:gap-10">
-                    <x-checkbox name="rating" :options="$options['ratings']">
-                        Рейтинг дилера
-                    </x-checkbox>
-                    <x-checkbox name="workTerms" :options="$options['workTerms']">
-                        Условия работы
-                    </x-checkbox>
+                    <div class="flex-wrap items-center justify-between my-4 sm:flex gap-x-4 md:gap-10">
+                        <x-checkbox name="rating" :options="$options['ratings']">
+                            Рейтинг дилера
+                        </x-checkbox>
+                        <x-checkbox name="workTerms" :options="$options['workTerms']">
+                            Условия работы
+                        </x-checkbox>
 
-                    <button
-                        class="block w-full px-6 py-3 mt-6 font-bold text-white transition-colors border md:ml-auto md:w-auto bg-black-primary rounded-xl hover:bg-red-primary"
-                        type="submit">Подобрать</button>
-                </div>
-            </form>
+                        <button
+                            class="block w-full px-6 py-3 mt-6 font-bold text-white transition-colors border md:ml-auto md:w-auto bg-black-primary rounded-xl hover:bg-red-primary"
+                            type="submit">Подобрать</button>
+                    </div>
+                </form>
+            @endisset
 
             <div class="p-4 mt-20 md:mt-10 lg:mt-20 sm:flex sm:gap-4 sm:flex-wrap sm:items-center md:p-6 lg:p-8">
                 <span class="block mb-4 font-bold text-black md:w-auto sm:mb-0 sm:w-full">Всего найдено:
@@ -78,8 +80,9 @@
                     <div x-data="{ showCarInfo: false, showManagerInfo: false }">
 
 
-                        <x-user.supplier-info :order="$index + 1" :type="$supplier->carType" :subtype="$supplier->carSubtype" :make="$supplier->carMake" :name="$supplier->name"
-                            :rating="$supplier->rating" :terms="$supplier->workTerms" :supervisor="$supplier->supervisor" :avatars="$supplier->managers->pluck('image')->toArray()" />
+                        <x-user.supplier-info :order="$index + 1" :type="$supplier->carType" :subtype="$supplier->carSubtype" :make="$supplier->carMake"
+                            :name="$supplier->name" :rating="$supplier->rating" :terms="$supplier->workTerms" :supervisor="$supplier->supervisor"
+                            :avatars="$supplier->managers->pluck('image')->toArray()" />
 
 
 
@@ -87,13 +90,8 @@
                             class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2">
                             @isset($supplier->managers)
                                 @foreach ($supplier->managers as $manager)
-                                    <x-user.manager-info
-                                    :rating="$manager->stars"
-                                    :name="$manager->name"
-                                    :phone="$manager->phone"
-                                    :email="$manager->email"
-                                    :image="$manager->image"
-                                    />
+                                    <x-user.manager-info :rating="$manager->stars" :name="$manager->name" :phone="$manager->phone"
+                                        :email="$manager->email" :image="$manager->image" />
                                 @endforeach
                             @endisset
                         </div>
@@ -105,7 +103,7 @@
         </section>
 
         @isset($suppliers)
-        {{ $suppliers->links() }}
+            {{ $suppliers->links() }}
         @endisset
 
     </main>
