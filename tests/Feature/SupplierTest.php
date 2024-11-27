@@ -171,10 +171,14 @@ it('filters suppliers by multiple selected values', function () {
         'carMake' => ['Toyota', 'Ford'],
         'rating' => ['A', 'B'],
     ]));
+    $content = $response->getContent();
+    preg_match('/<section id="table">(.*?)<\/section>/s', $content, $matches);
+    $resultsSection = $matches[1] ?? '';
 
-    // Assert: Only matching suppliers are returned
+
     $response->assertOk();
-    $response->assertSee('Toyota');
-    $response->assertSee('Ford');
-    $response->assertDontSee('Tesla');
+    $this->assertStringNotContainsString('Tesla', $resultsSection);
+
+    $this->assertStringContainsString('Toyota', $resultsSection);
+    $this->assertStringContainsString('Ford', $resultsSection);
 });
