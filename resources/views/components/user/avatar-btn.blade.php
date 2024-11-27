@@ -2,7 +2,7 @@
 
 <button
     @click="showManagerInfo = !showManagerInfo, showCarInfo = false"
-    class="flex justify-between gap-2 p-1 mt-2 rounded-full md:w-full lg:w-auto md:p-2 bg-extra-light-gray">
+    class="flex justify-between gap-2 p-1 mt-2 transition-colors rounded-full md:w-full lg:w-auto md:p-2 bg-extra-light-gray hover:ring-1 hover:ring-gray-400">
     <!-- Avatar Grid -->
     <div
         class="grid grid-cols-[repeat(4,8px)] sm:grid-cols-[repeat(4,16px)] md:sm:grid-cols-[repeat(4,8px)] lg:grid-cols-[repeat(4,18px)] gap-1">

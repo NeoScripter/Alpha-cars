@@ -27,4 +27,12 @@ class SupplierController extends Controller
 
         return view('user.index', compact('suppliers', 'options', 'perPage'));
     }
+
+    public function show(Supplier $supplier) {
+
+        $supplier->load([
+            'managers.managerReviews.user'
+        ]);
+        return view('user.supplier', compact('supplier'));
+    }
 }

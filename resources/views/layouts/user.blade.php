@@ -13,5 +13,7 @@
         <div class="mx-auto max-w-screen-3xl">
             {{ $slot }}
         </div>
+
+        <footer class="h-8 mt-5 md:mt-10 bg-red-primary"></footer>
     </body>
 </html>

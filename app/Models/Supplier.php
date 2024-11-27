@@ -51,6 +51,12 @@ class Supplier extends Model
     {
         return $this->hasMany(Manager::class);
     }
+
+    public function supplierReviews()
+    {
+        return $this->hasMany(SupplierReview::class);
+    }
+
     public function scopeSearch($query, array $filters = [])
     {
         foreach ($filters as $field => $values) {
@@ -95,5 +101,4 @@ class Supplier extends Model
             'workTerms' => $suppliers->pluck('workTerms')->unique()->sort()->values(),
         ];
     }
-
 }

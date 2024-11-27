@@ -15,5 +15,8 @@ class Manager extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
-
+    public function managerReviews()
+    {
+        return $this->hasMany(ManagerReview::class);
+    }
 }

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SupplierController::class, 'index'])->name('user.index');
 
+Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('user.supplier');
+
 Route::get('/admin', function () {
     return view('admin.admin');
 })->middleware(['auth', 'verified'])->name('admin');

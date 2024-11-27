@@ -7,7 +7,8 @@
     'rating' => 'А',
     'terms' => 'АВ - в круг',
     'supervisor' => 'Богатко Олька',
-    'avatars' => []
+    'avatars' => [],
+    'id' => "",
 ])
 
 <div
@@ -45,7 +46,7 @@
         <x-user.expand-btn>+{{ count($make) - 1 }}</x-user.expand-btn>
     </div>
     {{-- Supplier --}}
-    <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden sm:block">{{ $name }}</div>
+    <a href="{{ route('user.supplier', $id) }}" class="mx-1 underline py-1 border-r border-gray-[#E4E0E0] hidden sm:block">{{ $name }}</a>
     {{-- Rating --}}
     <div class="mx-1 py-1 border-r border-gray-[#E4E0E0] hidden md:block">{{ $rating }}</div>
     {{-- Rating, AB --}}
