@@ -20,7 +20,7 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => $this->faker->imageUrl(),
+            'image' => '/images/png/supplier.webp',
             'name' => $this->faker->company,
             'stars' => $this->faker->randomFloat(1, 1, 5),
             'emails' => [$this->faker->safeEmail],

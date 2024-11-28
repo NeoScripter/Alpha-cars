@@ -28,11 +28,11 @@
                             @endphp
                             <div x-show="showManagerInfo"
                             x-transition:enter="transition-all duration-500 ease-in-out"
-                            x-transition:enter-start="grid-rows-[repeat({{$manager_count}},0fr)]"
-                            x-transition:enter-end="grid-rows-[repeat({{$manager_count}},1fr)]"
+                            x-transition:enter-start="grid-rows-[repeat(20,0fr)]"
+                            x-transition:enter-end="grid-rows-[repeat(20,1fr)]"
                             x-transition:leave="transition-all duration-500 ease-in-out"
-                            x-transition:leave-start="grid-rows-[repeat({{$manager_count}},1fr)]"
-                            x-transition:leave-end="grid-rows-[repeat({{$manager_count}},0fr)]"
+                            x-transition:leave-start="grid-rows-[repeat(20,1fr)]"
+                            x-transition:leave-end="grid-rows-[repeat(20,0fr)]"
                             x-cloak
                                 class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2 grid">
                                 @foreach ($supplier->managers as $manager)
