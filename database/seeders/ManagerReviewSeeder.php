@@ -12,6 +12,6 @@ class ManagerReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+
     }
 }

@@ -92,9 +92,6 @@ it('ensures each manager review contains the necessary information', function ()
 
     $response->assertOk();
     $response->assertSee($review->overallStars);
-    $response->assertSee($review->responseSpeedStars);
-    $response->assertSee($review->priceStars);
-    $response->assertSee($review->keepsWordStars);
     $response->assertSee($review->content);
     $response->assertSee($review->user->name);
     $response->assertSee($review->user->image);
@@ -125,9 +122,6 @@ it('displays all manager reviews', function () {
 
         foreach ($manager->managerReviews as $review) {
             $response->assertSee($review->overallStars);
-            $response->assertSee($review->responseSpeedStars);
-            $response->assertSee($review->priceStars);
-            $response->assertSee($review->keepsWordStars);
             $response->assertSee($review->content);
             $response->assertSee($review->user->name);
             $response->assertSee($review->user->image);

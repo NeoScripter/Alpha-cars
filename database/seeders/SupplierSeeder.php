@@ -18,5 +18,6 @@ class SupplierSeeder extends Seeder
         ->has(Manager::factory()->count(4))
         ->count(20)
         ->create();
+
     }
 }
