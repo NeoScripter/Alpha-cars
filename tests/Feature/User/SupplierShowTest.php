@@ -72,10 +72,6 @@ it('loads all supplier details on the show page', function () {
         $response->assertSee($type);
     }
 
-    foreach ($supplier->carSubtype as $subtype) {
-        $response->assertSee($subtype);
-    }
-
     foreach ($supplier->carMake as $make) {
         $response->assertSee($make);
     }

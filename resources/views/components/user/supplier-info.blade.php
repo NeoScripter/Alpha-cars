@@ -54,7 +54,7 @@
         </span>{{ $terms }}</div>
     {{-- Supplier, Rating, Supervisor, Managers --}}
     <div class="sm:mx-1 py-1 md:pr-3 border-r space-y-2 border-gray-[#E4E0E0]">
-        <span class="block sm:hidden">{{ $name }}</span>
+        <a href="{{ route('user.supplier', $id) }}" class="block underline sm:hidden">{{ $name }}</a>
         <span class="block sm:hidden">{{ $rating }}</span>
         <span class="block sm:hidden">{{ $terms }}</span>
         <span class="block font-medium lg:hidden">{{ $supervisor }}</span>
