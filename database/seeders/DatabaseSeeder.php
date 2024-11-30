@@ -4,12 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Enums\UserRole;
 use App\Models\Manager;
 use App\Models\ManagerReview;
 use App\Models\Supplier;
 use App\Models\SupplierReview;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +24,13 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Dmitry',
             'image' => '/images/avatars/avatar.jpeg',
+        ]);
+
+        User::factory()->create([
+            'name' => 'admin',
+            'role' => UserRole::Admin->value, // Use the enum for role
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin123'),
         ]);
 
         // Create multiple suppliers

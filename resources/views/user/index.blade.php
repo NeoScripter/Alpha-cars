@@ -37,7 +37,7 @@
                                 class="py-6 border-t border-gray-[#E4E0E0] text-sm md:text-base text-black space-y-2 grid">
                                 @foreach ($supplier->managers as $manager)
                                     <x-user.manager-info :rating="$manager->stars" :name="$manager->name" :phone="$manager->phone"
-                                        :email="$manager->email" :image="$manager->image" />
+                                        :email="$manager->email" :image="$manager->image" :id="$manager->id" />
                                 @endforeach
                             </div>
                         @endisset

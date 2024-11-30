@@ -9,7 +9,7 @@ class Supplier extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+/*     protected $fillable = [
         'image',
         'name',
         'stars',
@@ -32,7 +32,9 @@ class Supplier extends Model
         'signees',
         'warantees',
         'payWithoutPTC',
-    ];
+    ]; */
+
+    protected $guarded = [];
 
     protected $casts = [
         'stars' => 'float',              // Ensure stars is always a float

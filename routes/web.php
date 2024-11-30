@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ManagerController;
 use App\Http\Controllers\User\SupplierController;
+use App\Http\Controllers\Admin\SupplierController as AdminSupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,14 +23,20 @@ Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('u
 
 Route::get('/manager/{manager}', [ManagerController::class, 'show'])->name('user.manager');
 
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->middleware(['auth', 'verified'])->name('admin');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::put('/admin/supplier/{supplier}', [AdminSupplierController::class, 'update'])->name('supplier.update');
+
+    Route::delete('/admin/supplier/{supplier}', [AdminSupplierController::class, 'destroy'])->name('supplier.destroy');
+    Route::get('/admin/supplier/{supplier}', [AdminSupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/supplier/create', [AdminSupplierController::class, 'store'])->name('supplier.create');
+
+    Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
+        ->where('search', '.*')
+        ->name('admin');
 });
 
 require __DIR__.'/auth.php';

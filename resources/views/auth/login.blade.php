@@ -7,14 +7,14 @@
 
         <!-- Email Address -->
         <div>
-            <x-admin.input-label for="email" :value="__('Email')" />
-            <x-admin.text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-admin.input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-admin.input-label for="name" :value="__('content.Name')" />
+            <x-admin.text-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required autofocus autocomplete="username" />
+            <x-admin.input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-admin.input-label for="password" :value="__('Password')" />
+            <x-admin.input-label for="password" :value="__('content.Password')" />
 
             <x-admin.text-input id="password" class="block w-full mt-1"
                             type="password"

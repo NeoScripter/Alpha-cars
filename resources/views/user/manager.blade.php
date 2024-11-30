@@ -5,7 +5,7 @@
     <main class="px-4 pt-10 pb-5 sm:px-5 md:px-10 lg:px-20 lg:pt-20 lg:pb-10 ">
         <a href="{{ url()->previous() }}" class="inline-flex items-center gap-1 mb-5 text-gray-400">
             <img src="{{ asset('images/svgs/back-to-main.svg') }}" alt="к списку" class="w-4 h-3">
-            Назад к поставщику
+            Назад
         </a>
 
         @isset($manager)
