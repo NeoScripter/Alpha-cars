@@ -31,7 +31,8 @@ class SupplierController extends Controller
     public function show(Supplier $supplier) {
 
         $supplier->load([
-            'managers.managerReviews.user'
+            'managers.managerReviews.user',
+            'supplierReviews.user'
         ]);
         return view('user.supplier', compact('supplier'));
     }

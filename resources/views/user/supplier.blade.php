@@ -45,7 +45,7 @@
                 </button>
             </section>
 
-            <section class="p-4 mb-20 md:p-10">
+            <section x-data="{ perPage: 12 }" x-cloak class="p-4 mb-20 md:p-10">
                 <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
                     <div class="inline-flex items-center gap-3 text-2xl">
                         <img src="{{ asset('images/svgs/supplier-review.svg') }}" alt="Машина" aria-hidden
@@ -59,32 +59,24 @@
                 </div>
 
                 <div class="grid gap-4 grid-cols-auto-fit-250 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    @foreach ($supplier->supplierReviews->take(8) as $review)
-                        <div class="bg-[#F5F5F5] rounded-xl p-6 flex flex-col gap-6 justify-between">
-                            <div class="flex items-center gap-3">
-                                <span class="font-bold">{{ number_format($review->stars, 1) }}</span>
-
-                                <x-user.stars :totalStars="$review->stars"/>
-
-                            </div>
-
-                            <div class="flex-1">
-                                {{ $review->content }}
-                            </div>
-
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 overflow-hidden rounded-full">
-                                    <img src="{{ $review->user->image }}" alt="Пользователь"
-                                        class="object-cover object-center w-full h-full">
-                                </div>
-                                {{ $review->user->name }}
-                            </div>
-                        </div>
+                    @php
+                        $iterations = 0;
+                    @endphp
+                    @foreach ($supplier->supplierReviews as $index => $review)
+                        <x-user.supplier-review :review="$review" :index="$index" />
+                        @php
+                            $iterations++;
+                        @endphp
                     @endforeach
                 </div>
+
+                <button x-show="{{ $iterations }} > perPage" @click="perPage += 12"
+                    class="block w-full px-6 py-3 mx-auto mt-4 text-black transition-colors bg-white border border-black md:mt-6 hover:text-white md:w-auto rounded-xl hover:bg-black-primary"
+                    type="button">Показать больше отзывов
+                </button>
             </section>
 
-            <section class="p-4 mb-20 md:p-15">
+            <section x-data="{ perPage: 12 }" x-cloak class="p-4 mb-20 md:p-15">
                 <div class="flex flex-wrap items-center gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
                     <div class="inline-flex items-center gap-3 text-2xl">
                         <img src="{{ asset('images/svgs/manager-review.svg') }}" alt="Машина" aria-hidden
@@ -94,62 +86,23 @@
                 </div>
 
                 <div class="grid gap-4 grid-cols-auto-fit-250 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    @php
+                        $iterations = 0;
+                    @endphp
                     @foreach ($supplier->managers as $manager)
-
-                    @foreach ($manager->managerReviews as $review)
-                        <div class="bg-[#F5F5F5] rounded-xl p-6 flex flex-col gap-6 justify-between">
-                            <div>
-                                <div class="flex items-start gap-3 mb-1">
-                                    <img src="{{ $manager->image }}" alt="Фото менеджера" class="w-8 h-8 rounded-full">
-                                    <div class="mt-0.5">
-                                        <span class="mt-1">{{ $manager->name }}</span>
-                                        <span class="block text-sm text-gray-400">менеджер</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold">{{ number_format($review->overallStars, 1) }}</span>
-                                    <x-user.stars :totalStars="$review->stars"/>
-                                </div>
-                            </div>
-
-                            <div class="space-y-5">
-                                <div class="items-start justify-between gap-1 sm:flex">
-                                    <span class="sm:basis-1/2">Быстро отвечает</span>
-                                    <div class="flex items-center gap-1">
-                                        <x-user.stars :totalStars="$review->responseSpeedStars"/>
-                                    </div>
-                                </div>
-                                <div class="items-start justify-between gap-1 sm:flex">
-                                    <span class="sm:basis-1/2">Лучшие цены</span>
-                                    <div class="flex items-center gap-1">
-                                        <x-user.stars :totalStars="$review->priceStars"/>
-                                    </div>
-                                </div>
-                                <div class="items-start justify-between gap-1 sm:flex">
-                                    <span class="sm:basis-1/2">Соблюдает договоренности</span>
-                                    <div class="flex items-center gap-1">
-                                        <x-user.stars :totalStars="$review->keepsWordStars"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-1">
-                                {{ $review->content }}
-                            </div>
-
-                            <a href="" class="text-gray-400 underline">Читать все отзывы</a>
-
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 overflow-hidden rounded-full">
-                                    <img src="{{ $review->user->image }}" alt="Пользователь"
-                                        class="object-cover object-center w-full h-full">
-                                </div>
-                                {{ $review->user->name }}
-                            </div>
-                        </div>
-                    @endforeach
+                        @foreach ($manager->managerReviews as $review)
+                            <x-user.manager-review :review="$review" :manager="$manager" :index="$iterations" />
+                            @php
+                                $iterations++;
+                            @endphp
+                        @endforeach
                     @endforeach
                 </div>
+
+                <button x-show="{{ $iterations }} > perPage" @click="perPage += 12"
+                    class="block w-full px-6 py-3 mx-auto mt-4 text-black transition-colors bg-white border border-black md:mt-6 hover:text-white md:w-auto rounded-xl hover:bg-black-primary"
+                    type="button">Показать больше отзывов
+                </button>
             </section>
         @endisset
 

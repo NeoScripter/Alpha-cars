@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ManagerController;
 use App\Http\Controllers\User\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SupplierController::class, 'index'])->name('user.index');
 
 Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('user.supplier');
+
+Route::get('/manager/{manager}', [ManagerController::class, 'show'])->name('user.manager');
 
 Route::get('/admin', function () {
     return view('admin.admin');
