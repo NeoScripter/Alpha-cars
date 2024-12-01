@@ -63,20 +63,16 @@ class Supplier extends Model
     {
         foreach ($filters as $field => $values) {
             if (is_array($values)) {
-                // Group all conditions for the field
                 $query->where(function ($subQuery) use ($field, $values) {
                     foreach ($values as $value) {
                         if (in_array($field, ['carType', 'carSubtype', 'carMake'])) {
-                            // JSON fields
                             $subQuery->orWhereJsonContains($field, $value);
                         } else {
-                            // String fields
                             $subQuery->orWhere($field, $value);
                         }
                     }
                 });
             } else {
-                // Single string input
                 $query->where($field, 'like', "%{$values}%");
             }
         }

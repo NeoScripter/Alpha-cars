@@ -17,6 +17,11 @@
                             Поставщики
                         </x-admin.nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('admin.manager.index')" :active="request()->routeIs('admin.manager.index')">
+                            Менеджеры
+                        </x-admin.nav-link>
+                    </div>
                  {{--    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('videocourses')" :active="request()->routeIs('videocourses')">
                             Видеокурсы
@@ -82,6 +87,11 @@
         <div class="space-y-1">
             <x-admin.responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                 Поставщики
+            </x-admin.responsive-nav-link>
+        </div>
+        <div class="space-y-1">
+            <x-admin.responsive-nav-link :href="route('admin.manager.index')" :active="request()->routeIs('admin.manager.index')">
+                Менеджеры
             </x-admin.responsive-nav-link>
         </div>
  {{--        <div class="space-y-1">

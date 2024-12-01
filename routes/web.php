@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ManagerController;
 use App\Http\Controllers\User\SupplierController;
 use App\Http\Controllers\Admin\SupplierController as AdminSupplierController;
+use App\Http\Controllers\Admin\ManagerController as AdminManagerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +37,19 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function () {
     Route::get('/admin/supplier/{supplier}', [AdminSupplierController::class, 'edit'])->name('supplier.edit');
     Route::post('/supplier/create', [AdminSupplierController::class, 'store'])->name('supplier.create');
 
+
+    Route::get('/admin/manager/{manager}', [AdminManagerController::class, 'edit'])->name('admin.manager.edit');
+    Route::post('/admin/manager', [AdminManagerController::class, 'store'])->name('admin.manager.store');
+    Route::put('/admin/manager/{manager}', [AdminManagerController::class, 'update'])->name('admin.manager.update');
+    Route::delete('/admin/manager/{manager}', [AdminManagerController::class, 'destroy'])->name('admin.manager.destroy');
+
+    Route::get('/admin/manager/{search?}', [AdminManagerController::class, 'index'])
+    ->where('search', '.*')
+    ->name('admin.manager.index');
+
     Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
-        ->where('search', '.*')
-        ->name('admin');
+    ->where('search', '.*')
+    ->name('admin');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
