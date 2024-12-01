@@ -24,7 +24,10 @@ class SupplierFactory extends Factory
             'name' => $this->faker->company,
             'stars' => $this->faker->randomFloat(1, 1, 5),
             'emails' => [$this->faker->safeEmail],
-            'phones' => [$this->faker->phoneNumber],
+            'phones' => [
+                $this->faker->numerify('###-###-####'),
+                $this->faker->numerify('###-###-####'),
+            ],
             'website' => $this->faker->url,
             'platform_address' => $this->faker->address,
             'unload_address' => $this->faker->address,

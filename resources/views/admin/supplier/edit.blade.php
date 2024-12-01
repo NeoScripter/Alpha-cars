@@ -22,22 +22,15 @@
                 <x-form-field name="name" label="Название поставщика" :value="$supplier->name" />
 
                 <!-- Emails -->
-                <x-admin.array-field
-                    field-name="emails"
-                    label="Emails"
-                    singular-label="Email"
-                    placeholder="Введите email"
-                    :values="$supplier->emails ?? []"
-                />
+                <x-admin.array-field field-name="emails" label="Emails" singular-label="Email"
+                    placeholder="Введите email" :values="$supplier->emails ?? []" />
 
                 <!-- Phones -->
-                <x-admin.array-field
-                    field-name="phones"
-                    label="Телефоны"
-                    singular-label="Телефон"
-                    placeholder="Введите номер"
-                    :values="$supplier->phones ?? []"
-                />
+                <x-admin.array-field field-name="phones" label="Телефоны" singular-label="Телефон"
+                    placeholder="Введите номер" :values="$supplier->phones ?? []" />
+
+                <!-- Website -->
+                <x-form-field name="website" label="Веб-сайт поставщика" :value="$supplier->website" />
 
                 <!-- Platform Address -->
                 <x-form-field name="platform_address" label="Адрес платформы" :value="$supplier->platform_address" />
@@ -58,31 +51,16 @@
                 <x-form-field name="rating" label="Рейтинг" :value="$supplier->rating" />
 
                 <!-- Car Type -->
-                <x-admin.array-field
-                    field-name="carType"
-                    label="Типы автомобилей"
-                    singular-label="Тип"
-                    placeholder="Введите тип автомобиля"
-                    :values="$supplier->carType ?? []"
-                />
+                <x-admin.array-field field-name="carType" label="Типы автомобилей" singular-label="Тип"
+                    placeholder="Введите тип автомобиля" :values="$supplier->carType ?? []" />
 
                 <!-- Car Subtype -->
-                <x-admin.array-field
-                    field-name="carSubtype"
-                    label="Подтипы автомобилей"
-                    singular-label="Подтип"
-                    placeholder="Введите подтип автомобиля"
-                    :values="$supplier->carSubtype ?? []"
-                />
+                <x-admin.array-field field-name="carSubtype" label="Подтипы автомобилей" singular-label="Подтип"
+                    placeholder="Введите подтип автомобиля" :values="$supplier->carSubtype ?? []" />
 
                 <!-- Car Make -->
-                <x-admin.array-field
-                    field-name="carMake"
-                    label="Марки автомобилей"
-                    singular-label="Марка"
-                    placeholder="Введите марку автомобиля"
-                    :values="$supplier->carMake ?? []"
-                />
+                <x-admin.array-field field-name="carMake" label="Марки автомобилей" singular-label="Марка"
+                    placeholder="Введите марку автомобиля" :values="$supplier->carMake ?? []" />
 
                 <!-- Work Terms -->
                 <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" :value="$supplier->workTerms" />
@@ -106,14 +84,8 @@
                 <x-form-field name="signees" label="Подписанты" :value="$supplier->signees" />
 
                 <!-- Image Upload -->
-                <x-admin.image-upload
-                    label="Фото поставщика"
-                    :image-path="$supplier->image"
-                    alt-text="Фото поставщика"
-                    new-label="Новое фото"
-                    input-id="image"
-                    input-name="image"
-                />
+                <x-admin.image-upload label="Фото поставщика" :image-path="$supplier->image" alt-text="Фото поставщика"
+                    new-label="Новое фото" input-id="image" input-name="image" />
 
                 <hr>
 
@@ -121,8 +93,7 @@
                 <div class="flex items-center gap-4">
                     <x-admin.primary-button>{{ __('Сохранить изменения') }}</x-admin.primary-button>
 
-                    <x-admin.danger-button
-                        x-data=""
+                    <x-admin.danger-button x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'confirm-supplier-deletion')">
                         {{ __('Удалить поставщика') }}
                     </x-admin.danger-button>
