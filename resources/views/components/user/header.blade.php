@@ -3,7 +3,8 @@
         <img src="{{ asset('images/svgs/logo.svg') }}" alt="Лого компании Альфа Лизинг" class="object-contain object-center w-full h-full">
     </a>
 
-    <a href="" aria-label="Выйти из аккаунта" class="block px-6 py-3 font-bold transition-colors border rounded-2xl text-red-primary border-red-primary hover:text-white hover:bg-red-primary">
-        Выйти
-    </a>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="block px-6 py-3 font-bold transition-colors border rounded-2xl text-red-primary border-red-primary hover:text-white hover:bg-red-primary">Выйти</button>
+    </form>
 </header>

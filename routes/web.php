@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [SupplierController::class, 'index'])->name('user.index');
+Route::middleware(['auth', 'role:admin,editor,user'])->group(function () {
+    Route::get('/', [SupplierController::class, 'index'])->name('user.index');
 
-Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('user.supplier');
+    Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('user.supplier');
 
-Route::get('/manager/{manager}', [ManagerController::class, 'show'])->name('user.manager');
+    Route::get('/manager/{manager}', [ManagerController::class, 'show'])->name('user.manager');
+});
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:admin,editor'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

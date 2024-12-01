@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Dmitry',
             'image' => '/images/avatars/avatar.jpeg',
+            'role' => UserRole::User->value,
+            'email' => 'dmitry@example.com',
+            'password' => Hash::make('dmitry123'),
         ]);
 
         User::factory()->create([
