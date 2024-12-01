@@ -51,7 +51,9 @@ class SupplierController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'emails' => 'nullable|array',
+            'emails.*' => 'nullable|email',
             'phones' => 'nullable|array',
+            'phones.*' => 'nullable|regex:/^[\d-]+$/',
             'website' => 'nullable|url',
             'platform_address' => 'nullable|string|max:255',
             'unload_address' => 'nullable|string|max:255',
@@ -79,14 +81,14 @@ class SupplierController extends Controller
 
         Supplier::create(array_merge($validated, [
             'image' => $imagePath,
-            'emails' => json_encode($validated['emails'] ?? []),
-            'phones' => json_encode($validated['phones'] ?? []),
-            'carType' => json_encode($validated['carType'] ?? []),
-            'carSubtype' => json_encode($validated['carSubtype'] ?? []),
-            'carMake' => json_encode($validated['carMake'] ?? []),
+            'emails' => $validated['emails'] ?? [],
+            'phones' => $validated['phones'] ?? [],
+            'carType' => $validated['carType'] ?? [],
+            'carSubtype' => $validated['carSubtype'] ?? [],
+            'carMake' => $validated['carMake'] ?? [],
         ]));
 
-        return redirect()->route('supplier.create')->with([
+        return redirect()->route('admin')->with([
             'status' => 'success',
             'message' => 'Поставщик успешно создан!',
         ]);
@@ -97,9 +99,10 @@ class SupplierController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'stars' => 'nullable|numeric|min:0|max:5',
             'emails' => 'nullable|array',
+            'emails.*' => 'nullable|email',
             'phones' => 'nullable|array',
+            'phones.*' => 'nullable|regex:/^[\d-]+$/',
             'website' => 'nullable|url',
             'platform_address' => 'nullable|string|max:255',
             'unload_address' => 'nullable|string|max:255',
@@ -120,6 +123,7 @@ class SupplierController extends Controller
             'image' => 'nullable|image|max:1024',
         ]);
 
+
         if ($request->hasFile('image')) {
             if ($supplier->image) {
                 Storage::disk('public')->delete($supplier->image);
@@ -131,14 +135,14 @@ class SupplierController extends Controller
 
         $supplier->update(array_merge($validated, [
             'image' => $supplier->image,
-            'emails' => json_encode($validated['emails'] ?? []),
-            'phones' => json_encode($validated['phones'] ?? []),
-            'carType' => json_encode($validated['carType'] ?? []),
-            'carSubtype' => json_encode($validated['carSubtype'] ?? []),
-            'carMake' => json_encode($validated['carMake'] ?? []),
+            'emails' => $validated['emails'] ?? [],
+            'phones' => $validated['phones'] ?? [],
+            'carType' => $validated['carType'] ?? [],
+            'carSubtype' => $validated['carSubtype'] ?? [],
+            'carMake' => $validated['carMake'] ?? [],
         ]));
 
-        return redirect()->route('supplier.update', $supplier->id)->with([
+        return redirect()->route('admin')->with([
             'status' => 'success',
             'message' => 'Поставщик успешно обновлен!',
         ]);

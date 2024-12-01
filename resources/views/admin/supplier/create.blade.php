@@ -16,10 +16,22 @@
         <x-form-field name="name" label="Название поставщика" />
 
         <!-- Emails -->
-        <x-form-field name="emails" label="Электронные адреса" :is-textarea="true" />
+        <x-admin.array-field
+            field-name="emails"
+            label="Электронные адреса"
+            singular-label="Email"
+            placeholder="Введите email"
+            :values="[]"
+        />
 
         <!-- Phones -->
-        <x-form-field name="phones" label="Телефоны" :is-textarea="true" />
+        <x-admin.array-field
+            field-name="phones"
+            label="Телефоны"
+            singular-label="Телефон"
+            placeholder="Введите номер"
+            :values="[]"
+        />
 
         <!-- Website -->
         <x-form-field name="website" label="Веб-сайт поставщика" />
@@ -43,13 +55,31 @@
         <x-form-field name="rating" label="Рейтинг" />
 
         <!-- Car Types -->
-        <x-form-field name="carType" label="Типы автомобилей" :is-textarea="true" />
+        <x-admin.array-field
+            field-name="carType"
+            label="Типы автомобилей"
+            singular-label="Тип"
+            placeholder="Введите тип автомобиля"
+            :values="[]"
+        />
 
         <!-- Car Subtypes -->
-        <x-form-field name="carSubtype" label="Подтипы автомобилей" :is-textarea="true" />
+        <x-admin.array-field
+            field-name="carSubtype"
+            label="Подтипы автомобилей"
+            singular-label="Подтип"
+            placeholder="Введите подтип автомобиля"
+            :values="[]"
+        />
 
         <!-- Car Makes -->
-        <x-form-field name="carMake" label="Марки автомобилей" :is-textarea="true" />
+        <x-admin.array-field
+            field-name="carMake"
+            label="Марки автомобилей"
+            singular-label="Марка"
+            placeholder="Введите марку автомобиля"
+            :values="[]"
+        />
 
         <!-- Work Terms -->
         <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" />
@@ -58,33 +88,33 @@
         <x-form-field name="supervisor" label="Контактное лицо (руководитель)" />
 
         <!-- DKP -->
-        <x-form-field name="dkp" label="ДКП предоставляется?" type="checkbox" />
+        <x-admin.checkbox name="dkp" label="ДКП предоставляется?" />
 
         <!-- Image Specs -->
-        <x-form-field name="image_spec" label="Соответствует требованиям изображения?" type="checkbox" />
+        <x-admin.checkbox name="image_spec" label="Соответствует требованиям изображения?" />
 
         <!-- Signees -->
-        <x-form-field name="signees" label="Подписанты" :is-textarea="true" />
+        <x-form-field name="signees" label="Подписанты" />
 
         <!-- Warranties -->
-        <x-form-field name="warantees" label="Гарантии предоставлены?" type="checkbox" />
+        <x-admin.checkbox name="warantees" label="Гарантии предоставлены?" />
 
         <!-- Payment Without PTC -->
-        <x-form-field name="payWithoutPTC" label="Оплата без ПТК?" type="checkbox" />
+        <x-admin.checkbox name="payWithoutPTC" label="Оплата без ПТК?" />
 
         <!-- Image Upload -->
-        <div>
-            <p class="block mb-1 text-sm font-medium text-gray-700">Фото поставщика</p>
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Новое
-                фото</label>
-            <input
-                class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="image" name="image" type="file">
-        </div>
+        <x-admin.image-upload
+            label="Фото поставщика"
+            alt-text="Фото поставщика"
+            new-label="Новое фото"
+            input-id="image"
+            input-name="image"
+        />
 
         <!-- Submit Button -->
         <div class="flex items-center gap-4">
             <x-admin.primary-button>{{ __('Создать') }}</x-admin.primary-button>
         </div>
     </form>
+
 </section>

@@ -1,13 +1,13 @@
 <div>
     <p class="block mb-1 text-sm font-medium text-gray-700">{{ $label }}</p>
 
-    @if ($imagePath)
+    @isset ($imagePath)
         <div>
             <figure class="relative max-w-sm mb-1">
                 <img class="rounded-lg" src="{{ Storage::url($imagePath) }}" alt="{{ $altText ?? 'Image' }}">
             </figure>
         </div>
-    @endif
+    @endisset
 
     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="{{ $inputId }}">
         {{ $newLabel }}

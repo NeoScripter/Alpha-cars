@@ -12,6 +12,7 @@
                 @csrf
                 @method('PUT')
 
+                <!-- Back Link -->
                 <div class="flex items-center gap-4">
                     <x-admin.link href="{{ route('admin') }}">Назад</x-admin.link>
                 </div>
@@ -20,14 +21,23 @@
                 <!-- Supplier Name -->
                 <x-form-field name="name" label="Название поставщика" :value="$supplier->name" />
 
-                <!-- Stars -->
-                <x-form-field name="stars" label="Рейтинг поставщика" type="number" :value="$supplier->stars" />
-
                 <!-- Emails -->
-                <x-form-field name="emails" label="Электронные адреса" :is-textarea="true" :value="json_encode($supplier->emails)" />
+                <x-admin.array-field
+                    field-name="emails"
+                    label="Emails"
+                    singular-label="Email"
+                    placeholder="Введите email"
+                    :values="$supplier->emails ?? []"
+                />
 
                 <!-- Phones -->
-                <x-form-field name="phones" label="Телефоны" :is-textarea="true" :value="json_encode($supplier->phones)" />
+                <x-admin.array-field
+                    field-name="phones"
+                    label="Телефоны"
+                    singular-label="Телефон"
+                    placeholder="Введите номер"
+                    :values="$supplier->phones ?? []"
+                />
 
                 <!-- Platform Address -->
                 <x-form-field name="platform_address" label="Адрес платформы" :value="$supplier->platform_address" />
@@ -44,6 +54,36 @@
                 <!-- RRC -->
                 <x-form-field name="rrc" label="Регистрационный код" :value="$supplier->rrc" />
 
+                <!-- Rating -->
+                <x-form-field name="rating" label="Рейтинг" :value="$supplier->rating" />
+
+                <!-- Car Type -->
+                <x-admin.array-field
+                    field-name="carType"
+                    label="Типы автомобилей"
+                    singular-label="Тип"
+                    placeholder="Введите тип автомобиля"
+                    :values="$supplier->carType ?? []"
+                />
+
+                <!-- Car Subtype -->
+                <x-admin.array-field
+                    field-name="carSubtype"
+                    label="Подтипы автомобилей"
+                    singular-label="Подтип"
+                    placeholder="Введите подтип автомобиля"
+                    :values="$supplier->carSubtype ?? []"
+                />
+
+                <!-- Car Make -->
+                <x-admin.array-field
+                    field-name="carMake"
+                    label="Марки автомобилей"
+                    singular-label="Марка"
+                    placeholder="Введите марку автомобиля"
+                    :values="$supplier->carMake ?? []"
+                />
+
                 <!-- Work Terms -->
                 <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" :value="$supplier->workTerms" />
 
@@ -51,20 +91,44 @@
                 <x-form-field name="supervisor" label="Контактное лицо (руководитель)" :value="$supplier->supervisor" />
 
                 <!-- DKP -->
-                <x-form-field name="dkp" label="ДКП предоставляется?" type="checkbox" :value="$supplier->dkp" />
+                <x-admin.checkbox name="dkp" label="DKP Status" :value="$supplier->dkp ?? false" />
+
+                <!-- Image Spec -->
+                <x-admin.checkbox name="image_spec" label="Image Specification Met" :value="$supplier->image_spec ?? false" />
+
+                <!-- Provides Warranty -->
+                <x-admin.checkbox name="warantees" label="Provides Warranty" :value="$supplier->warantees ?? false" />
+
+                <!-- Pay Without PTC -->
+                <x-admin.checkbox name="payWithoutPTC" label="Pay Without PTC" :value="$supplier->payWithoutPTC ?? false" />
+
+                <!-- Signees -->
+                <x-form-field name="signees" label="Подписанты" :value="$supplier->signees" />
 
                 <!-- Image Upload -->
-                <x-admin.image-upload label="Фото поставщика" :image-path="$supplier->image" alt-text="Фото поставщика"
-                    new-label="Новое фото" input-id="image" input-name="image" />
+                <x-admin.image-upload
+                    label="Фото поставщика"
+                    :image-path="$supplier->image"
+                    alt-text="Фото поставщика"
+                    new-label="Новое фото"
+                    input-id="image"
+                    input-name="image"
+                />
 
+                <hr>
+
+                <!-- Save and Delete Buttons -->
                 <div class="flex items-center gap-4">
                     <x-admin.primary-button>{{ __('Сохранить изменения') }}</x-admin.primary-button>
 
-                    <x-admin.danger-button x-data=""
-                        x-on:click.prevent="$dispatch('open-modal', 'confirm-supplier-deletion')">{{ __('Удалить поставщика') }}</x-admin.danger-button>
+                    <x-admin.danger-button
+                        x-data=""
+                        x-on:click.prevent="$dispatch('open-modal', 'confirm-supplier-deletion')">
+                        {{ __('Удалить поставщика') }}
+                    </x-admin.danger-button>
                 </div>
-                <hr>
             </form>
+
         </section>
 
         <!-- Confirmation Modal for Deletion -->
@@ -93,7 +157,6 @@
                 </div>
             </form>
         </x-admin.modal>
-
     @endif
 
 </x-admin-layout>
