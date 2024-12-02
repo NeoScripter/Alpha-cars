@@ -1,10 +1,10 @@
 <section>
     <div>
         <h2 class="flex flex-wrap items-center justify-between gap-4 text-lg font-medium text-gray-900">
-            Все менеджеры
+            Все пользователи
 
             <form class="max-w-sm sm:ml-auto w-100 shrink-0" method="GET"
-                onsubmit="event.preventDefault(); window.location.href = '/admin/managers/' + encodeURIComponent(this.search.value);">
+                onsubmit="event.preventDefault(); window.location.href = '/admin/users/' + encodeURIComponent(this.search.value);">
                 <label for="default-search"
                     class="text-sm font-medium text-gray-900 sr-only dark:text-white">Поиск</label>
                 <div class="relative">
@@ -17,7 +17,7 @@
                     </div>
                     <input type="search" name="search" id="default-search"
                         class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-gray-900 focus:border-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Найти менеджера..." />
+                        placeholder="Найти пользователя..." />
                     <button type="submit"
                         class="text-white absolute end-2.5 bottom-2.5 bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Поиск</button>
                 </div>
@@ -27,43 +27,50 @@
 
     <div class="mt-4 space-y-6">
 
-        @if (isset($managers))
-            @if ($managers->isNotEmpty())
-                @foreach ($managers as $manager)
+        @if (isset($users))
+            @if ($users->isNotEmpty())
+                @foreach ($users as $user)
                     <hr>
                     <div>
                         <div>
-                            <p class="block mb-1 font-bold text-black font-sm text-md">{{ $manager->name }}</p>
+                            <p class="block mb-1 font-bold text-black font-sm text-md">{{ $user->name }}</p>
                         </div>
                         <div>
-                            <p class="block mb-1 text-gray-700 font-sm text-md">Телефон: {{ $manager->phone }}</p>
+                            <p class="block mb-1 text-gray-700 font-sm text-md">Email: {{ $user->email }}</p>
                         </div>
                         <div>
-                            <p class="block mb-1 text-gray-700 font-sm text-md">Email: {{ $manager->email }}</p>
+                            <p class="block mb-1 text-gray-700 font-sm text-md">Роль: {{ $user->role === 'user' ? 'Пользователь' : 'Редактор'}}</p>
                         </div>
-                        <div>
-                            <p class="block mb-1 text-gray-700 font-sm text-md">Поставщик: {{ $manager->supplier->name ?? 'Не назначен' }}</p>
-                        </div>
-                        @if ($manager->image)
+                        @isset ($user->image)
                             <div>
                                 <figure class="relative max-w-sm mb-1">
-                                    <img class="rounded-lg" src="{{ Storage::url($manager->image) }}"
-                                        alt="Фото менеджера">
+                                    <img class="rounded-lg" src="{{ Storage::url($user->image) }}"
+                                        alt="Фото пользователя">
                                 </figure>
                             </div>
-                        @endif
+                        @endisset
 
-                        <x-admin.link
-                            href="{{ route('admin.manager.edit', $manager) }}">{{ __('Редактировать') }}</x-admin.link>
+                        <x-admin.link href="{{ route('admin.users.edit', $user) }}">{{ __('Редактировать') }}</x-admin.link>
+
+                        @if (Auth::user()->role === 'admin' || (Auth::user()->role === 'editor' && $user->role === 'user'))
+                            <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <x-admin.danger-button
+                                    onclick="return confirm('Вы уверены, что хотите удалить этого пользователя?')">
+                                    {{ __('Удалить') }}
+                                </x-admin.danger-button>
+                            </form>
+                        @endif
                     </div>
                 @endforeach
             @else
-                <p class="no-managers-message">Не найдено ни одного менеджера</p>
+                <p class="no-users-message">Не найдено ни одного пользователя</p>
             @endif
 
-            {{ $managers->links() }}
+            {{ $users->links() }}
         @else
-            <p class="no-managers-message">Нет ни одного менеджера</p>
+            <p class="no-users-message">Нет ни одного пользователя</p>
         @endif
 
     </div>

@@ -3,7 +3,7 @@
 <div x-show="{{ $index }} < perPage" class="bg-[#F5F5F5] rounded-xl p-6 flex flex-col gap-6 justify-between">
     <div>
         <div class="flex items-start gap-3 mb-1">
-            <img src="{{ $manager->image }}" alt="Фото менеджера" class="w-8 h-8 rounded-full">
+            <img src="{{ Storage::url($manager->image) }}" alt="Фото менеджера" class="w-8 h-8 rounded-full">
             <div class="mt-0.5">
                 <span class="mt-1">{{ $manager->name }}</span>
                 <span class="block text-sm text-gray-400">менеджер</span>
@@ -11,7 +11,7 @@
         </div>
         <div class="flex items-center gap-2">
             <span class="font-bold">{{ number_format($review->overallStars, 1) }}</span>
-            <x-user.stars :totalStars="$review->stars"/>
+            <x-user.stars :totalStars="$review->overallStars"/>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
 
     <div class="flex items-center gap-3">
         <div class="w-10 h-10 overflow-hidden rounded-full">
-            <img src="{{ $review->user->image }}" alt="Пользователь"
+            <img src="{{ Storage::url($review->user->image) }}" alt="Пользователь"
                 class="object-cover object-center w-full h-full">
         </div>
         {{ $review->user->name }}

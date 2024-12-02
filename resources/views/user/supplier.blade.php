@@ -23,7 +23,7 @@
                     @include('user.partials.supplier-info-top')
 
                     <div class="hidden ml-auto overflow-hidden md:block rounded-xl md:basis-[47%] lg:basis-1/4 lg:order-2">
-                        <img src="{{ $supplier->image }}" alt="Фотография компании поставщика" class="rounded-xl">
+                        <img src="{{ Storage::url($supplier->image) }}" alt="Фотография компании поставщика" class="rounded-xl">
                     </div>
 
                     <div class="flex flex-col gap-4 sm:flex-row sm:w-full lg:basis-1/2">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="overflow-hidden md:hidden rounded-xl sm:h-63">
-                        <img src="{{ $supplier->image }}" alt="Фотография компании поставщика">
+                        <img src="{{ Storage::url($supplier->image) }}" alt="Фотография компании поставщика">
                     </div>
                 </div>
 

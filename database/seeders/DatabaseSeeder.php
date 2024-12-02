@@ -22,38 +22,44 @@ class DatabaseSeeder extends Seeder
     {
         // Create the user
         $user = User::factory()->create([
-            'name' => 'Dmitry',
-            'image' => '/images/avatars/avatar.jpeg',
+            'name' => 'user',
+            'image' => collect(glob(storage_path('app/public/avatars/*.*')))
+            ->map(fn($path) => 'avatars/' . basename($path))
+            ->random(),
             'role' => UserRole::User->value,
-            'email' => 'dmitry@example.com',
-            'password' => Hash::make('dmitry123'),
+            'email' => 'user@example.com',
+            'password' => Hash::make('user123'),
         ]);
 
         User::factory()->create([
             'name' => 'admin',
-            'role' => UserRole::Admin->value, // Use the enum for role
+            'role' => UserRole::Admin->value,
             'email' => 'admin@example.com',
             'password' => Hash::make('admin123'),
         ]);
 
-        // Create multiple suppliers
-        Supplier::factory(10) // Change the number of suppliers as needed
+        User::factory()->create([
+            'name' => 'editor',
+            'role' => UserRole::Editor->value,
+            'email' => 'editor@example.com',
+            'password' => Hash::make('editor123'),
+        ]);
+
+
+        Supplier::factory(10)
             ->has(
-                // Each supplier has 5 managers
                 Manager::factory(5)
                     ->has(
-                        // Each manager has 5 reviews
                         ManagerReview::factory(5)
                             ->state([
-                                'user_id' => $user->id, // Associate reviews with the created user
+                                'user_id' => $user->id,
                             ])
                     )
             )
             ->has(
-                // Each supplier has 40 supplier reviews
                 SupplierReview::factory(40)
                     ->state([
-                        'user_id' => $user->id, // Associate reviews with the created user
+                        'user_id' => $user->id,
                     ])
             )
             ->create();

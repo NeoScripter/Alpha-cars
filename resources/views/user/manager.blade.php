@@ -13,7 +13,7 @@
             <section x-data="{ perPage: 12 }" x-cloak class="p-4 mb-20 md:p-15">
                 <div class="flex flex-wrap items-center gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
                     <div class="inline-flex items-center gap-3 text-2xl">
-                        <img src="{{ asset('images/svgs/manager-review.svg') }}" alt="Машина" aria-hidden
+                        <img src="{{ asset('images/svgs/manager-review.svg') }}" alt="Люди" aria-hidden
                             class="flex-shrink-0 w-8 h-8">
                         Отзывы о {{ $manager->name }}
                     </div>

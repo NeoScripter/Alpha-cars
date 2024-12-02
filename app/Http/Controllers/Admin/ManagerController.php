@@ -13,14 +13,15 @@ class ManagerController extends Controller
     // Display a listing of managers
     public function index($search = null)
     {
-        $managers = Manager::latest()->paginate(10);
+        $managers = Manager::latest();
 
         if ($search) {
             $managers->where(function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%")
-                      ->orWhere('email', 'like', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%");
             });
         }
+
+        $managers = $managers->paginate(10);
 
         $suppliers = Supplier::all(['id', 'name']);
 

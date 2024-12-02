@@ -20,7 +20,9 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => '/images/png/supplier.webp',
+            'image' => collect(glob(storage_path('app/public/suppliers/*.*')))
+            ->map(fn($path) => 'suppliers/' . basename($path))
+            ->random(),
             'name' => $this->faker->company,
             'stars' => $this->faker->randomFloat(1, 1, 5),
             'emails' => [$this->faker->safeEmail],

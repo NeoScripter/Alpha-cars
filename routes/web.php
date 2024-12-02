@@ -5,6 +5,7 @@ use App\Http\Controllers\User\ManagerController;
 use App\Http\Controllers\User\SupplierController;
 use App\Http\Controllers\Admin\SupplierController as AdminSupplierController;
 use App\Http\Controllers\Admin\ManagerController as AdminManagerController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,9 +44,16 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function () {
     Route::put('/admin/manager/{manager}', [AdminManagerController::class, 'update'])->name('admin.manager.update');
     Route::delete('/admin/manager/{manager}', [AdminManagerController::class, 'destroy'])->name('admin.manager.destroy');
 
-    Route::get('/admin/manager/{search?}', [AdminManagerController::class, 'index'])
+    Route::get('/admin/managers/{search?}', [AdminManagerController::class, 'index'])
     ->where('search', '.*')
     ->name('admin.manager.index');
+
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::get('/admin/users/{search?}', [UserController::class, 'index'])->name('admin.users.index');
 
     Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
     ->where('search', '.*')

@@ -26,8 +26,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'image' => collect(glob(public_path('images/avatars/*.*')))
-            ->map(fn($path) => Str::replaceFirst(public_path(), '', $path))
+            'image' => collect(glob(storage_path('app/public/avatars/*.*')))
+            ->map(fn($path) => 'avatars/' . basename($path))
             ->random(),
             'role' => UserRole::User->value,
             'email' => fake()->unique()->safeEmail(),
