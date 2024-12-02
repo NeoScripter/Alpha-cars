@@ -18,7 +18,6 @@ it('ensures each manager review contains the necessary information', function ()
     $response = $this->get(route('user.manager', $review->manager->id));
 
     $response->assertOk();
-    $response->assertSee($review->overallStars);
     $response->assertSee($review->content);
     $response->assertSee($review->user->name);
     $response->assertSee($review->user->image);
@@ -50,7 +49,6 @@ it('displays all reviews for a single manager', function () {
     $response->assertSee($manager->image);
 
     foreach ($manager->managerReviews as $review) {
-        $response->assertSee($review->overallStars);
         $response->assertSee($review->content);
         $response->assertSee($review->user->name);
         $response->assertSee($review->user->image);

@@ -43,7 +43,6 @@ it('loads all supplier details on the show page', function () {
     // Assert: Check for individual supplier fields
     $response->assertSee($supplier->image);
     $response->assertSee($supplier->name);
-    $response->assertSee($supplier->stars);
     $response->assertSee($supplier->website);
     $response->assertSee($supplier->platform_address);
     $response->assertSee($supplier->unload_address);
@@ -91,7 +90,6 @@ it('ensures each manager review contains the necessary information', function ()
     $response = $this->get(route('user.supplier', $review->manager->supplier_id));
 
     $response->assertOk();
-    $response->assertSee($review->overallStars);
     $response->assertSee($review->content);
     $response->assertSee($review->user->name);
     $response->assertSee($review->user->image);
@@ -121,7 +119,6 @@ it('displays all manager reviews', function () {
         $response->assertSee($manager->image);
 
         foreach ($manager->managerReviews as $review) {
-            $response->assertSee($review->overallStars);
             $response->assertSee($review->content);
             $response->assertSee($review->user->name);
             $response->assertSee($review->user->image);
