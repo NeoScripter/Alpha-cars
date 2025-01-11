@@ -36,7 +36,7 @@ class SupplierFactory extends Factory
             'legal_entity' => $this->faker->companySuffix,
             'itn' => $this->faker->numerify('##########'),
             'rrc' => $this->faker->word,
-            'rating' => $this->faker->randomElement(['A', 'B', 'C']),
+            'rating' => $this->faker->randomElement(['A', 'B', 'C', 'D', 'E', 'нет рейтинга']),
             'carType' => collect(range(1, rand(1, 3)))
                 ->map(fn() => $this->faker->randomElement(['МБ', 'СТ', 'ЛА', 'ГА']))
                 ->toArray(),
@@ -46,7 +46,7 @@ class SupplierFactory extends Factory
             'carMake' => collect(range(1, rand(5, 18)))
                 ->map(fn() => $this->faker->randomElement(['Audi', 'BMW', 'Toyota', 'Honda']))
                 ->toArray(),
-            'workTerms' => $this->faker->randomElement(['АВ - нет', 'АВ - в круг']),
+            'workTerms' => $this->faker->randomElement(['АВ - в круг', 'АВ - не в круг']),
             'supervisor' => $this->faker->name,
             'dkp' => $this->faker->boolean,
             'image_spec' => $this->faker->boolean,

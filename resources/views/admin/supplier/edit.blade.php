@@ -51,16 +51,16 @@
                 <x-form-field name="rating" label="Рейтинг" :value="$supplier->rating" />
 
                 <!-- Car Type -->
-                <x-admin.array-field field-name="carType" label="Типы автомобилей" singular-label="Тип"
-                    placeholder="Введите тип автомобиля" :values="$supplier->carType ?? []" />
+                <x-admin.array-select field-name="carType" label="Типы автомобилей" singular-label="Тип"
+                    placeholder="Введите тип автомобиля" :values="$supplier->carType ?? []" :options="$criteria->carTypes" />
 
                 <!-- Car Subtype -->
-                <x-admin.array-field field-name="carSubtype" label="Подтипы автомобилей" singular-label="Подтип"
-                    placeholder="Введите подтип автомобиля" :values="$supplier->carSubtype ?? []" />
+                <x-admin.array-select field-name="carSubtype" label="Подтипы автомобилей" singular-label="Подтип"
+                    placeholder="Введите подтип автомобиля" :values="$supplier->carSubtypes ?? []" :options="$criteria->carSubtype" />
 
                 <!-- Car Make -->
-                <x-admin.array-field field-name="carMake" label="Марки автомобилей" singular-label="Марка"
-                    placeholder="Введите марку автомобиля" :values="$supplier->carMake ?? []" />
+                <x-admin.array-select field-name="carMake" label="Марки автомобилей" singular-label="Марка"
+                    placeholder="Введите марку автомобиля" :values="$supplier->carMake ?? []" :options="$criteria->carMake" />
 
                 <!-- Work Terms -->
                 <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" :value="$supplier->workTerms" />

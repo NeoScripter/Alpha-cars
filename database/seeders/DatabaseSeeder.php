@@ -65,5 +65,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $this->command->info('Database seeded successfully!');
+
+        $this->call(CriteriaSeeder::class);
     }
 }

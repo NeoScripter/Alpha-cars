@@ -6,9 +6,26 @@
                 <x-dropdown name="carType" :options="$options['carTypes']">
                     Тип авто
                 </x-dropdown>
-                <x-dropdown name="carSubtype" :options="$options['carSubtypes']">
-                    Подтип авто
-                </x-dropdown>
+
+                <div>
+                    <label for="carSubtype" class="block mb-2 text-sm font-medium" :class="fields.carType.length === 0 ? 'text-gray-400' : 'text-gray-900'">
+                        Подтип авто
+                    </label>
+
+                    <select
+                        :disabled="fields.carType.length === 0"
+                        id="carSubtype"
+                        class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
+                        :class="fields.carType.length === 0 ? 'cursor-not-allowed text-transparent' : ''"
+                        @change="addToArray('carSubtype', $event.target.value)"
+                    >
+                        <option value="" disabled selected :class="fields.carType.length > 0 ? 'hidden' : ''"></option>
+                        @foreach ($options['carSubtypes'] as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <x-dropdown name="carMake" :options="$options['carMakes']">
                     Марка
                 </x-dropdown>
@@ -99,6 +116,10 @@
 
             removeFromArray(field, index) {
                 this.fields[field].splice(index, 1);
+
+                if (this.fields.carType.length === 0) {
+                    this.fields.carSubtype.length = 0;
+                }
             },
 
             emptyArrays() {
@@ -109,7 +130,7 @@
 
             isEmpty() {
                 return Object.values(this.fields).some(field => field.length > 0);
-            }
+            },
         };
     }
 </script>

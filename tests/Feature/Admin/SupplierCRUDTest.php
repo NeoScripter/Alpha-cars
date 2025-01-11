@@ -72,9 +72,9 @@ it('can delete a supplier', function () {
 
 it('validates input when creating a supplier', function () {
     $response = $this->post(route('supplier.create'), [
-        'name' => '', // Required field is empty
-        'emails' => ['invalid-email'], // Invalid email format
-        'phones' => ['invalid-phone'], // Invalid phone format
+        'name' => '',
+        'emails' => ['invalid-email'],
+        'phones' => ['invalid-phone'],
     ]);
 
     $response->assertSessionHasErrors([

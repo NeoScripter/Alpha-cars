@@ -27,6 +27,11 @@
                             Пользователи
                         </x-admin.nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('admin.criteria.edit')" :active="request()->routeIs('admin.criteria.edit')">
+                            Критерии поиска
+                        </x-admin.nav-link>
+                    </div>
                 </div>
             </div>
 
@@ -91,6 +96,11 @@
         <div class="space-y-1">
             <x-admin.responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                 Пользователи
+            </x-admin.responsive-nav-link>
+        </div>
+        <div class="space-y-1">
+            <x-admin.responsive-nav-link :href="route('admin.criteria.edit')" :active="request()->routeIs('admin.criteria.edit')">
+                Критерии поиска
             </x-admin.responsive-nav-link>
         </div>
 

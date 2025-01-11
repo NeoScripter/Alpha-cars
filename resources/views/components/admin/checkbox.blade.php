@@ -5,6 +5,8 @@
 ])
 
 <div class="flex items-center mb-4">
+    <input type="hidden" name="{{ $name }}" value="0" />
+
     <input
         id="{{ $name }}"
         type="checkbox"

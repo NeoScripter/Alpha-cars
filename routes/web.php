@@ -5,6 +5,7 @@ use App\Http\Controllers\User\ManagerController;
 use App\Http\Controllers\User\SupplierController;
 use App\Http\Controllers\Admin\SupplierController as AdminSupplierController;
 use App\Http\Controllers\Admin\ManagerController as AdminManagerController;
+use App\Http\Controllers\Admin\CriteriaController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,10 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function () {
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
     Route::get('/admin/users/{search?}', [UserController::class, 'index'])->name('admin.users.index');
+
+
+    Route::get('/admin/criteria', [CriteriaController::class, 'edit'])->name('admin.criteria.edit');
+    Route::put('/admin/criteria/{criteria}', [CriteriaController::class, 'update'])->name('admin.criteria.update');
 
     Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
     ->where('search', '.*')

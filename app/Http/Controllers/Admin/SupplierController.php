@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Criteria;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,7 +43,8 @@ class SupplierController extends Controller
     // Edit a supplier
     public function edit(Supplier $supplier)
     {
-        return view('admin.supplier.edit', compact('supplier'));
+        $criteria = Criteria::first();
+        return view('admin.supplier.edit', compact('supplier', 'criteria'));
     }
 
     // Store a new supplier
