@@ -4,7 +4,7 @@
     x-transition:enter="transition-all duration-500 ease-in-out"
     x-transition:enter-start="grid-rows-[0fr]"
     x-transition:enter-end="grid-rows-[1fr]"
-    x-transition:leave="transition-all duration-500 ease-in-out"
+    x-transition:leave="transition-all duration-500 ease-in"
     x-transition:leave-start="grid-rows-[1fr]"
     x-transition:leave-end="grid-rows-[0fr]"
     x-cloak

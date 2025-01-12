@@ -1,6 +1,6 @@
-<div x-show="showPopup" x-transition class="fixed inset-0 z-20 pt-24 bg-black/50">
+<div x-show="showPopup" x-cloak x-transition class="fixed inset-0 z-20 pt-24 bg-black/50">
 
-    <div class="p-4 md:p-6 mx-auto space-y-4 bg-white rounded-xl max-w-[768px]">
+    <div @click.away="showPopup = false" class="p-4 md:p-6 mx-auto space-y-4 bg-white rounded-xl max-w-[768px]">
 
         <div class="flex items-center justify-between gap-2">
             <div class="text-2xl font-bold">Новый отзыв</div>
@@ -14,7 +14,7 @@
         <form class="space-y-4" action="{{ route('supplier-review.store') }}" method="POST">
             @csrf
             <input type="hidden" name="supplier_id" :value="{{ $supplier->id }}">
-            <div class="bg-[#F5F5F5] rounded-xl p-4">
+            <div class="bg-[#F5F5F5] rounded-xl p-4 md:p-6">
 
                 <div class="flex items-start gap-4">
                     <div class="w-12 h-12 rounded-full overflow-clip">
@@ -53,7 +53,7 @@
                                 </template>
                             </div>
 
-                            <input type="hidden" name="stars" :value="isSet ? score : null">
+                            <input type="hidden" name="stars" :value="isSet ? score : 0">
                         </div>
                     </div>
                 </div>

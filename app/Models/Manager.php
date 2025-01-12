@@ -9,7 +9,7 @@ class Manager extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'phone', 'email', 'stars', 'supplier_id'];
+    protected $guarded = [];
 
     public function supplier()
     {

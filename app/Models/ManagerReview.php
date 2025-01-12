@@ -9,14 +9,7 @@ class ManagerReview extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'responseSpeedStars',
-        'priceStars',
-        'keepsWordStars',
-        'content',
-        'user_id',
-        'manager_id',
-    ];
+    protected $guarded = [];
 
     public function user()
     {
