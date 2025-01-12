@@ -16,22 +16,12 @@
         <x-form-field name="name" label="Название поставщика" />
 
         <!-- Emails -->
-        <x-admin.array-field
-            field-name="emails"
-            label="Электронные адреса"
-            singular-label="Email"
-            placeholder="Введите email"
-            :values="[]"
-        />
+        <x-admin.array-field field-name="emails" label="Электронные адреса" singular-label="Email"
+            placeholder="Введите email" :values="[]" />
 
         <!-- Phones -->
-        <x-admin.array-field
-            field-name="phones"
-            label="Телефоны"
-            singular-label="Телефон"
-            placeholder="Введите номер"
-            :values="[]"
-        />
+        <x-admin.array-field field-name="phones" label="Телефоны" singular-label="Телефон" placeholder="Введите номер"
+            :values="[]" />
 
         <!-- Website -->
         <x-form-field name="website" label="Веб-сайт поставщика" />
@@ -52,64 +42,46 @@
         <x-form-field name="rrc" label="Регистрационный код" />
 
         <!-- Rating -->
-        <x-form-field name="rating" label="Рейтинг" />
+        <x-admin.simple-select-field name="rating" label="Рейтинг" :options="$criteria->rating" />
 
-        <!-- Car Types -->
-        <x-admin.array-field
-            field-name="carType"
-            label="Типы автомобилей"
-            singular-label="Тип"
-            placeholder="Введите тип автомобиля"
-            :values="[]"
-        />
+        <!-- Car Type -->
+        <x-admin.array-select field-name="carType" label="Типы автомобилей" singular-label="Тип"
+         :values="[]" :options="$criteria->carTypes" />
 
-        <!-- Car Subtypes -->
-        <x-admin.array-field
-            field-name="carSubtype"
-            label="Подтипы автомобилей"
-            singular-label="Подтип"
-            placeholder="Введите подтип автомобиля"
-            :values="[]"
-        />
+        <!-- Car Subtype -->
+        <x-admin.array-select field-name="carSubtype" label="Подтипы автомобилей" singular-label="Подтип"
+         :values="[]" :options="$criteria->carSubtypes" />
 
-        <!-- Car Makes -->
-        <x-admin.array-field
-            field-name="carMake"
-            label="Марки автомобилей"
-            singular-label="Марка"
-            placeholder="Введите марку автомобиля"
-            :values="[]"
-        />
+        <!-- Car Make -->
+        <x-admin.array-select field-name="carMake" label="Марки автомобилей" singular-label="Марку"
+         :values="[]" :options="$criteria->carMakes" />
+
 
         <!-- Work Terms -->
-        <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" />
+        <x-admin.simple-select-field name="workTerms" label="Условия работы" :options="$criteria->workTerms" />
 
         <!-- Supervisor -->
         <x-form-field name="supervisor" label="Контактное лицо (руководитель)" />
 
         <!-- DKP -->
-        <x-admin.checkbox name="dkp" label="ДКП предоставляется?" />
+        <x-admin.checkbox name="dkp" label="ДКП согласовано" />
 
         <!-- Image Specs -->
-        <x-admin.checkbox name="image_spec" label="Соответствует требованиям изображения?" />
+        <x-admin.checkbox name="image_spec" label="Спецификация картинкой" />
 
         <!-- Signees -->
         <x-form-field name="signees" label="Подписанты" />
 
         <!-- Warranties -->
-        <x-admin.checkbox name="warantees" label="Гарантии предоставлены?" />
+        <x-admin.checkbox name="warantees" label="Гарантии" />
 
         <!-- Payment Without PTC -->
-        <x-admin.checkbox name="payWithoutPTC" label="Оплата без ПТК?" />
+        <x-admin.checkbox name="payWithoutPTC" label="Можем ли оплачивать без ПТС" />
+
 
         <!-- Image Upload -->
-        <x-admin.image-upload
-            label="Фото поставщика"
-            alt-text="Фото поставщика"
-            new-label="Новое фото"
-            input-id="image"
-            input-name="image"
-        />
+        <x-admin.image-upload label="Фото поставщика" alt-text="Фото поставщика" new-label="Новое фото" input-id="image"
+            input-name="image" />
 
         <!-- Submit Button -->
         <div class="flex items-center gap-4">

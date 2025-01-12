@@ -9,44 +9,19 @@ class Supplier extends Model
 {
     use HasFactory;
 
-/*     protected $fillable = [
-        'image',
-        'name',
-        'stars',
-        'emails',
-        'phones',
-        'website',
-        'platform_address',
-        'unload_address',
-        'legal_entity',
-        'itn',
-        'rrc',
-        'rating',
-        'carType',
-        'carSubtype',
-        'carMake',
-        'workTerms',
-        'supervisor',
-        'dkp',
-        'image_spec',
-        'signees',
-        'warantees',
-        'payWithoutPTC',
-    ]; */
-
     protected $guarded = [];
 
     protected $casts = [
-        'stars' => 'float',              // Ensure stars is always a float
-        'emails' => 'array',             // Convert JSON to array
-        'phones' => 'array',             // Convert JSON to array
-        'carSubtype' => 'array',         // Convert JSON to array
-        'carMake' => 'array',            // Convert JSON to array
+        'stars' => 'float',
+        'emails' => 'array',
+        'phones' => 'array',
+        'carSubtype' => 'array',
+        'carMake' => 'array',
         'carType' => 'array',
-        'dkp' => 'boolean',              // Boolean flag
-        'image_spec' => 'boolean',       // Boolean flag
-        'warantees' => 'boolean',        // Boolean flag
-        'payWithoutPTC' => 'boolean',    // Boolean flag
+        'dkp' => 'boolean',
+        'image_spec' => 'boolean',
+        'warantees' => 'boolean',
+        'payWithoutPTC' => 'boolean',
     ];
 
     public function managers()
@@ -88,15 +63,16 @@ class Supplier extends Model
     public static function preloadFilters()
     {
         // Fetch unique values for JSON fields and regular string fields
-        $suppliers = self::select(['carType', 'carSubtype', 'carMake', 'name', 'rating', 'workTerms'])->get();
+        $suppliers = self::select(['name'])->get();
+        $criteria = Criteria::first();
 
         return [
-            'carTypes' => $suppliers->pluck('carType')->flatten()->unique()->sort()->values(),
-            'carSubtypes' => $suppliers->pluck('carSubtype')->flatten()->unique()->sort()->values(),
-            'carMakes' => $suppliers->pluck('carMake')->flatten()->unique()->sort()->values(),
+            'carTypes' => $criteria->carTypes,
+            'carSubtypes' => $criteria->carSubtypes,
+            'carMakes' => $criteria->carMakes,
             'names' => $suppliers->pluck('name')->unique()->sort()->values(),
-            'ratings' => $suppliers->pluck('rating')->unique()->sort()->values(),
-            'workTerms' => $suppliers->pluck('workTerms')->unique()->sort()->values(),
+            'ratings' => $criteria->rating,
+            'workTerms' => $criteria->workTerms,
         ];
     }
 }

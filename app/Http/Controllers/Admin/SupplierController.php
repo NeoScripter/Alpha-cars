@@ -22,8 +22,9 @@ class SupplierController extends Controller
         }
 
         $suppliers = $suppliers->paginate(10);
+        $criteria = Criteria::first();
 
-        return view('admin.admin', compact('suppliers'));
+        return view('admin.admin', compact('suppliers', 'criteria'));
     }
 
     // Delete a supplier

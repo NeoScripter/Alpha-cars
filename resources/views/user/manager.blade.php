@@ -10,13 +10,18 @@
 
         @isset($manager)
 
-            <section x-data="{ perPage: 12 }" x-cloak class="p-4 mb-20 md:p-15">
-                <div class="flex flex-wrap items-center gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
+            <section x-data="{ perPage: 12, showPopup: {{ session('errors') ? 'true' : 'false' }} }" x-cloak class="p-4 mb-20 md:p-15">
+                <div class="flex flex-wrap justify-between items-center gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
                     <div class="inline-flex items-center gap-3 text-2xl">
                         <img src="{{ asset('images/svgs/manager-review.svg') }}" alt="Люди" aria-hidden
                             class="flex-shrink-0 w-8 h-8">
                         Отзывы о {{ $manager->name }}
                     </div>
+
+                    <button
+                        @click="showPopup = true"
+                        class="block w-full px-6 py-3 font-bold text-white transition-colors border sm:w-auto bg-black-primary rounded-xl hover:bg-red-primary"
+                        type="button">Оставить отзыв</button>
                 </div>
 
                 <div class="grid gap-4 grid-cols-auto-fit-250 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

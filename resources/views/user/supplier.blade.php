@@ -23,7 +23,7 @@
                     @include('user.partials.supplier-info-top')
 
                     <div class="hidden ml-auto overflow-hidden md:block rounded-xl md:basis-[47%] lg:basis-1/4 lg:order-2">
-                        <img src="{{ Storage::url($supplier->image) }}" alt="Фотография компании поставщика" class="rounded-xl">
+                        <img src="{{ isset($supplier->image) ? Storage::url($supplier->image) : '' }}" alt="Фотография компании поставщика" class="rounded-xl">
                     </div>
 
                     <div class="flex flex-col gap-4 sm:flex-row sm:w-full lg:basis-1/2">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="overflow-hidden md:hidden rounded-xl sm:h-63">
-                        <img src="{{ Storage::url($supplier->image) }}" alt="Фотография компании поставщика">
+                        <img src="{{ isset($supplier->image) ? Storage::url($supplier->image) : '' }}" alt="Фотография компании поставщика">
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                 </button>
             </section>
 
-            <section x-data="{ perPage: 12 }" x-cloak class="p-4 mb-20 md:p-10">
+            <section x-data="{ perPage: 12, showPopup: {{ session('errors') ? 'true' : 'false' }} }" x-cloak class="p-4 mb-20 md:p-10">
                 <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4 border-b border-gray-[#E4E0E0]">
                     <div class="inline-flex items-center gap-3 text-2xl">
                         <img src="{{ asset('images/svgs/supplier-review.svg') }}" alt="Машина" aria-hidden
@@ -53,10 +53,17 @@
                         Отзывы о поставщике
                     </div>
 
+                    @if ($canComment)
                     <button
+                        @click="showPopup = true"
                         class="block w-full px-6 py-3 font-bold text-white transition-colors border sm:w-auto bg-black-primary rounded-xl hover:bg-red-primary"
                         type="button">Оставить отзыв</button>
+                    @endif
                 </div>
+
+
+                @include('user.partials.supplier-review')
+
 
                 <div class="grid gap-4 grid-cols-auto-fit-250 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @php

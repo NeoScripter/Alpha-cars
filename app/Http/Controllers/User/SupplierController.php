@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
+use App\Models\SupplierReview;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -34,6 +35,15 @@ class SupplierController extends Controller
             'managers.managerReviews.user',
             'supplierReviews.user'
         ]);
-        return view('user.supplier', compact('supplier'));
+
+        $userId = auth()->id();
+
+        $existingReview = SupplierReview::select('id')->where('user_id', $userId)
+            ->where('supplier_id', $supplier->id)
+            ->first();
+
+        $canComment = $existingReview ? false : true;
+
+        return view('user.supplier', compact('supplier', 'canComment'));
     }
 }

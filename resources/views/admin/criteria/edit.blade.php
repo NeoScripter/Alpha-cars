@@ -22,7 +22,7 @@
 
                 <div class="mb-6">
                     <x-admin.array-field field-name="carMakes" label="Марки авто" singular-label="Марка авто"
-                        placeholder="" :values="$criteria->carMake ?? []" />
+                        placeholder="" :values="$criteria->carMakes ?? []" />
                 </div>
 
                 <div class="mb-6">

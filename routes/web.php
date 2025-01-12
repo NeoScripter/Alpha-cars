@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SupplierController as AdminSupplierController;
 use App\Http\Controllers\Admin\ManagerController as AdminManagerController;
 use App\Http\Controllers\Admin\CriteriaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\SupplierReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,8 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function () {
 
     Route::get('/admin/criteria', [CriteriaController::class, 'edit'])->name('admin.criteria.edit');
     Route::put('/admin/criteria/{criteria}', [CriteriaController::class, 'update'])->name('admin.criteria.update');
+
+    Route::post('/admin/supplier-review', [SupplierReviewController::class, 'store'])->name('supplier-review.store');
 
     Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
     ->where('search', '.*')

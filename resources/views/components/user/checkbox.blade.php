@@ -2,7 +2,7 @@
     <label for="{{ $name }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {{ $slot }}
     </label>
-    <div class="flex space-x-4">
+    <div class="flex flex-wrap space-x-4 gap-y-4">
         @foreach ($options as $value)
             <div>
                 <!-- Hidden Checkbox -->

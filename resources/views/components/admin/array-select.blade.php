@@ -2,7 +2,6 @@
     'fieldName' => '',
     'label',
     'singularLabel',
-    'placeholder' => '',
     'values' => [], // Initial values for the selects
     'options' => [], // Array of options (label and value are the same)
 ])
@@ -10,7 +9,6 @@
 <div x-data="{
     items: {{ json_encode($values) }},
     options: {{ json_encode($options) }},
-    placeholder: '{{ $placeholder }}',
     fieldName: '{{ $fieldName }}',
     addItem() {
         this.items.push(''); // Add a new empty item
@@ -30,7 +28,6 @@
                 x-model="items[index]"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-                <option value="" x-bind:selected="item === ''">{{ $placeholder }}</option>
                 <template x-for="option in options" :key="option">
                     <option :value="option" x-text="option" x-bind:selected="item === option"></option>
                 </template>

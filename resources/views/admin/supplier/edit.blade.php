@@ -22,7 +22,7 @@
                 <x-form-field name="name" label="Название поставщика" :value="$supplier->name" />
 
                 <!-- Emails -->
-                <x-admin.array-field field-name="emails" label="Emails" singular-label="Email"
+                <x-admin.array-field field-name="emails" label="Адреса email" singular-label="Email"
                     placeholder="Введите email" :values="$supplier->emails ?? []" />
 
                 <!-- Phones -->
@@ -48,37 +48,38 @@
                 <x-form-field name="rrc" label="Регистрационный код" :value="$supplier->rrc" />
 
                 <!-- Rating -->
-                <x-form-field name="rating" label="Рейтинг" :value="$supplier->rating" />
+                <x-admin.simple-select-field name="rating" label="Рейтинг" :options="$criteria->rating" :value="$supplier->rating" />
 
                 <!-- Car Type -->
                 <x-admin.array-select field-name="carType" label="Типы автомобилей" singular-label="Тип"
-                    placeholder="Введите тип автомобиля" :values="$supplier->carType ?? []" :options="$criteria->carTypes" />
+                :values="$supplier->carType ?? []" :options="$criteria->carTypes" />
 
                 <!-- Car Subtype -->
                 <x-admin.array-select field-name="carSubtype" label="Подтипы автомобилей" singular-label="Подтип"
-                    placeholder="Введите подтип автомобиля" :values="$supplier->carSubtypes ?? []" :options="$criteria->carSubtype" />
+                :values="$supplier->carSubtypes ?? []" :options="$criteria->carSubtype" />
 
                 <!-- Car Make -->
-                <x-admin.array-select field-name="carMake" label="Марки автомобилей" singular-label="Марка"
-                    placeholder="Введите марку автомобиля" :values="$supplier->carMake ?? []" :options="$criteria->carMake" />
+                <x-admin.array-select field-name="carMake" label="Марки автомобилей" singular-label="Марку"
+                :values="$supplier->carMake ?? []" :options="$criteria->carMakes" />
 
                 <!-- Work Terms -->
-                <x-form-field name="workTerms" label="Условия работы" :is-textarea="true" :value="$supplier->workTerms" />
+                <x-admin.simple-select-field name="workTerms" label="Условия работы" :options="$criteria->workTerms"
+                    :value="$supplier->workTerms" />
 
                 <!-- Supervisor -->
                 <x-form-field name="supervisor" label="Контактное лицо (руководитель)" :value="$supplier->supervisor" />
 
                 <!-- DKP -->
-                <x-admin.checkbox name="dkp" label="DKP Status" :value="$supplier->dkp ?? false" />
+                <x-admin.checkbox name="dkp" label="ДКП согласовано" :value="$supplier->dkp ?? false" />
 
                 <!-- Image Spec -->
-                <x-admin.checkbox name="image_spec" label="Image Specification Met" :value="$supplier->image_spec ?? false" />
+                <x-admin.checkbox name="image_spec" label="Спецификация картинкой" :value="$supplier->image_spec ?? false" />
 
                 <!-- Provides Warranty -->
-                <x-admin.checkbox name="warantees" label="Provides Warranty" :value="$supplier->warantees ?? false" />
+                <x-admin.checkbox name="warantees" label="Гарантии" :value="$supplier->warantees ?? false" />
 
                 <!-- Pay Without PTC -->
-                <x-admin.checkbox name="payWithoutPTC" label="Pay Without PTC" :value="$supplier->payWithoutPTC ?? false" />
+                <x-admin.checkbox name="payWithoutPTC" label="Можем ли оплачивать без ПТС" :value="$supplier->payWithoutPTC ?? false" />
 
                 <!-- Signees -->
                 <x-form-field name="signees" label="Подписанты" :value="$supplier->signees" />

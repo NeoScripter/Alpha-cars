@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'user',
             'image' => collect(glob(storage_path('app/public/avatars/*.*')))
-            ->map(fn($path) => 'avatars/' . basename($path))
-            ->random(),
+                ->map(fn($path) => 'avatars/' . basename($path))
+                ->random(),
             'role' => UserRole::User->value,
             'email' => 'user@example.com',
             'password' => Hash::make('user123'),
@@ -46,26 +46,26 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Supplier::factory(10)
+        Supplier::factory(80)
             ->has(
                 Manager::factory(5)
                     ->has(
-                        ManagerReview::factory(5)
+                        ManagerReview::factory(1)
                             ->state([
                                 'user_id' => $user->id,
                             ])
                     )
             )
             ->has(
-                SupplierReview::factory(40)
+                SupplierReview::factory(10)
                     ->state([
                         'user_id' => $user->id,
                     ])
             )
             ->create();
 
-        $this->command->info('Database seeded successfully!');
 
         $this->call(CriteriaSeeder::class);
+        $this->command->info('Database seeded successfully!');
     }
 }
