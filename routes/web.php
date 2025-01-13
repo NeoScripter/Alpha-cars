@@ -28,6 +28,10 @@ Route::middleware(['auth', 'role:admin,editor,user'])->group(function () {
     Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('user.supplier');
 
     Route::get('/manager/{manager}', [ManagerController::class, 'show'])->name('user.manager');
+
+    Route::post('/supplier-review', [SupplierReviewController::class, 'store'])->name('supplier-review.store');
+
+    Route::post('/manager-review', [ManagerReviewController::class, 'store'])->name('manager-review.store');
 });
 
 Route::middleware(['auth', 'role:admin,editor'])->group(function () {
@@ -61,10 +65,6 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function () {
 
     Route::get('/admin/criteria', [CriteriaController::class, 'edit'])->name('admin.criteria.edit');
     Route::put('/admin/criteria/{criteria}', [CriteriaController::class, 'update'])->name('admin.criteria.update');
-
-    Route::post('/admin/supplier-review', [SupplierReviewController::class, 'store'])->name('supplier-review.store');
-
-    Route::post('/admin/manager-review', [ManagerReviewController::class, 'store'])->name('manager-review.store');
 
 
     Route::get('/admin/{search?}', [AdminSupplierController::class, 'index'])
