@@ -1,4 +1,4 @@
-<div x-show="showPopup" x-cloak x-transition class="fixed inset-0 z-20 pt-24 bg-black/50">
+<div x-show="showPopup" x-cloak x-transition class="fixed inset-0 z-20 pt-4 sm:pt-8 md:pt-12 bg-black/50">
 
     <div @click.away="showPopup = false" class="p-4 md:p-6 mx-auto space-y-4 bg-white rounded-xl max-w-[768px]">
 
@@ -167,7 +167,7 @@
             </div>
 
             <div class="bg-[#F5F5F5] rounded-xl p-4">
-                <textarea name="content" rows="10"
+                <textarea name="content" rows="6"
                     class="w-full bg-gray-100 border-none rounded-xl focus:ring-red-500 focus:border-red-500"
                     placeholder="Опишите плюсы и минусы"></textarea>
             </div>
