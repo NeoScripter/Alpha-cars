@@ -44,4 +44,20 @@
             </x-admin.primary-button>
         </div>
     </form>
+
+    <form method="POST" action="{{ route('login.demo') }}" class="space-y-3">
+        @csrf
+
+        <div class="flex items-center justify-end mt-4">
+            <p class="text-sm text-gray-600 rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                Демо версия
+            </p>
+
+            <x-admin.primary-button class="ms-3">
+                {{ __('Войти без регистрации') }}
+            </x-admin.primary-button>
+        </div>
+
+
+    </form>
 </x-guest-layout>

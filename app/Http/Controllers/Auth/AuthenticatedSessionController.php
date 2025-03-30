@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -44,5 +46,22 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function demoLogin()
+    {
+        $key = 'demo-login:' . request()->ip();
+
+        if (RateLimiter::tooManyAttempts($key, 10)) {
+            abort(429, 'Too many demo logins. Please try again later.');
+        }
+
+        RateLimiter::hit($key, 60);
+
+        $user = User::where('email', 'admin@example.com')->firstOrFail();
+
+        Auth::login($user);
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }
